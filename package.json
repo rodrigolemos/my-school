@@ -4,7 +4,7 @@
   "description": "A simple typescript API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/app.ts"
   },
   "author": "Rodrigo Lemos",
   "license": "ISC",
