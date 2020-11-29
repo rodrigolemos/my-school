@@ -1,4 +1,6 @@
-import express, { Request, Response } from 'express'
+import 'reflect-metadata'
+import './config/typeorm'
+import express from 'express'
 import cors from 'cors'
 import routes from './routes'
 
