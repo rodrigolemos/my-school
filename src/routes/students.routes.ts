@@ -1,11 +1,8 @@
-import { Router, Request, Response } from 'express'
+import { Router } from 'express'
+import StudentController from '../controllers/StudentController'
 
 const studentsRouter = Router()
 
-studentsRouter.get('/list', (req: Request, res: Response) => {
-  return res.send({
-    hello: 'students router'
-  })
-})
+studentsRouter.get('/list', StudentController.list)
 
 export default studentsRouter

@@ -1,11 +1,8 @@
-import { Router, Request, Response } from 'express'
+import { Router } from 'express'
+import CourseController from '../controllers/CourseController'
 
 const coursesRouter = Router()
 
-coursesRouter.get('/list', (req: Request, res: Response) => {
-  return res.send({
-    hello: 'courses router'
-  })
-})
+coursesRouter.get('/list', CourseController.list)
 
 export default coursesRouter
