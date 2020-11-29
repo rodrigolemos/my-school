@@ -1,12 +1,14 @@
 import { Request, Response } from 'express'
+import ListCoursesService from '../services/ListCoursesService'
 
 class CourseController {
 
   public async list(req: Request, res: Response) {
-    return res.send({
-      hello: 'course controller'
-    })
+    const listCoursesService = new ListCoursesService()
+    const courses = await listCoursesService.execute()
+    return res.send(courses)
   }
+
 }
 
 export default new CourseController

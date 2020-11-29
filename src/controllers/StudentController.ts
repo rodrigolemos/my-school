@@ -1,12 +1,11 @@
 import { Request, Response } from 'express'
-import { getRepository } from 'typeorm'
-
+import ListStudentsService from '../services/ListStudentsService'
 class StudentController {
 
   public async list(req: Request, res: Response) {
-    return res.send({
-      hello: 'student controller'
-    })
+    const listStudentsService = new ListStudentsService()
+    const students = await listStudentsService.execute()
+    return res.send(students)
   }
 }
 
