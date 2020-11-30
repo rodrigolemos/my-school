@@ -3,7 +3,7 @@ import ListCoursesService from '../services/ListCoursesService'
 
 class CourseController {
 
-  public async list(req: Request, res: Response) {
+  public async index(req: Request, res: Response) {
     const listCoursesService = new ListCoursesService()
     const courses = await listCoursesService.execute()
     return res.send(courses)

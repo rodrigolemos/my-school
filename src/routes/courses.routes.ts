@@ -3,6 +3,6 @@ import CourseController from '../controllers/CourseController'
 
 const coursesRouter = Router()
 
-coursesRouter.get('/list', CourseController.list)
+coursesRouter.get('/:id?', CourseController.index)
 
 export default coursesRouter

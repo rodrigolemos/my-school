@@ -3,6 +3,6 @@ import StudentController from '../controllers/StudentController'
 
 const studentsRouter = Router()
 
-studentsRouter.get('/list', StudentController.list)
+studentsRouter.get('/:id?', StudentController.index)
 
 export default studentsRouter
