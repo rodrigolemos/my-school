@@ -17,13 +17,13 @@ class CreateUserService {
     const { name, birth_date, email, password, role } = body
     const userRepository = getRepository(User)
 
-    const userRegistered = await userRepository.find({
+    const userRegistered = await userRepository.findOne({
       where: {
         email
       }
     })
 
-    if (userRegistered.length)
+    if (userRegistered)
       throw new AppError('Email address already used', 400)
 
     const criptPassword = await generateHash(password)
