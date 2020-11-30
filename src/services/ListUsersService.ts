@@ -6,7 +6,11 @@ class ListUsersService {
   public async execute(): Promise<User[]> {
     const userRepository = getRepository(User)
     const users = await userRepository.find()
-    return users
+    const foundUsers = users.map(user => {
+      delete user.password
+      return user
+    })
+    return foundUsers
   }
 
 }
