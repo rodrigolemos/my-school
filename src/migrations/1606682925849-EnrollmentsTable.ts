@@ -8,7 +8,7 @@ export class EnrollmentsTable1606682925849 implements MigrationInterface {
                 name: 'enrollments',
                 columns: [
                     {
-                        name: 'student_id',
+                        name: 'user_id',
                         type: 'integer',
                         isPrimary: true,
                         isNullable: false,
@@ -36,10 +36,10 @@ export class EnrollmentsTable1606682925849 implements MigrationInterface {
         await queryRunner.createForeignKey(
             'enrollments',
             new TableForeignKey({
-                name: 'StudentEnrollment',
-                columnNames: ['student_id'],
+                name: 'UserEnrollment',
+                columnNames: ['user_id'],
                 referencedColumnNames: ['id'],
-                referencedTableName: 'students',
+                referencedTableName: 'users',
                 onDelete: 'SET NULL',
                 onUpdate: 'CASCADE',
             }),
@@ -59,8 +59,8 @@ export class EnrollmentsTable1606682925849 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropForeignKey('students', 'StudentEnrollment')
-        await queryRunner.dropForeignKey('courses', 'CourseEnrollment')
+        await queryRunner.dropForeignKey('enrollments', 'UserEnrollment')
+        await queryRunner.dropForeignKey('enrollments', 'CourseEnrollment')
         await queryRunner.dropTable('enrollments')
     }
 

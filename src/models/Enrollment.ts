@@ -4,21 +4,21 @@ import {
   PrimaryColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToMany,
+  ManyToOne,
 } from 'typeorm';
 
 import Course from './Course';
-import Student from './Student';
+import User from './User';
 
 @Entity('enrollments')
 class Enrollment {
   @PrimaryColumn('integer')
-  @ManyToMany(() => Student, student => student.id)
-  @JoinColumn({ name: 'student_id' })
-  student_id?: number
+  @ManyToOne(() => User, user => user.id, { eager: true })
+  @JoinColumn({ name: 'user_id' })
+  user_id?: number
 
   @PrimaryColumn('integer')
-  @ManyToMany(() => Course, course => course.id)
+  @ManyToOne(() => Course, course => course.id, { eager: true })
   @JoinColumn({ name: 'course_id' })
   course_id?: number
 

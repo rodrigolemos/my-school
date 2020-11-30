@@ -1,11 +1,11 @@
 import { Router } from 'express'
 import coursesRouter from './courses.routes'
 import enrollmentsRouter from './enrollments.routes'
-import studentsRouter from './students.routes'
+import usersRouter from './users.routes'
 
 const routes = Router()
 
-routes.use('/students', studentsRouter)
+routes.use('/users', usersRouter)
 routes.use('/courses', coursesRouter)
 routes.use('/enrollments', enrollmentsRouter)
 

@@ -6,7 +6,7 @@ import {
   UpdateDateColumn
 } from 'typeorm'
 
-@Entity('students')
+@Entity('users')
 class Student {
   @PrimaryGeneratedColumn('increment')
   id?: number
@@ -14,11 +14,17 @@ class Student {
   @Column('varchar')
   name?: string
 
-  @Column('varchar')
-  document?: string
-
   @Column('date')
   birth_date?: Date
+
+  @Column('varchar')
+  email?: string
+
+  @Column('varchar')
+  password?: string
+
+  @Column('varchar')
+  role?: string
 
   @CreateDateColumn()
   created_at?: Date
