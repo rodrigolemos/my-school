@@ -7,7 +7,7 @@ import {
 } from 'typeorm'
 
 @Entity('users')
-class Student {
+class User {
   @PrimaryGeneratedColumn('increment')
   id?: number
 
@@ -33,4 +33,4 @@ class Student {
   updated_at?: Date
 }
 
-export default Student
+export default User
