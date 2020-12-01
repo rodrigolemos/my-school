@@ -1,16 +1,6 @@
-import { Request, Response, NextFunction } from 'express'
-import { validationResult, checkSchema } from 'express-validator'
+import { checkSchema } from 'express-validator'
 
-export const handleResult = (req: Request, res: Response, next: NextFunction) => {
-  const errors = validationResult(req)
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ msg: errors.array()[0].msg })
-  } else {
-    next()
-  }
-}
-
-export const setPayloadFormat = checkSchema({
+export const setUserFormat = checkSchema({
   name: {
     errorMessage: 'Name should be at least 3 chars long',
     isLength: {

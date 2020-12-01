@@ -9,6 +9,10 @@ class CourseController {
     return res.send(courses)
   }
 
+  public async store(req: Request, res: Response): Promise<Response> {
+    return res.send({ hello: 'world' })
+  }
+
 }
 
 export default new CourseController
