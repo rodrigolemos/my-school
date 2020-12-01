@@ -20,6 +20,11 @@ export class EnrollmentsTable1606682925849 implements MigrationInterface {
                         isNullable: false,
                     },
                     {
+                        name: 'created_by',
+                        type: 'integer',
+                        isNullable: false
+                    },
+                    {
                         name: 'created_at',
                         type: 'timestamp',
                         default: 'now()',
@@ -56,11 +61,24 @@ export class EnrollmentsTable1606682925849 implements MigrationInterface {
                 onUpdate: 'CASCADE',
             }),
         )
+
+        await queryRunner.createForeignKey(
+            'enrollments',
+            new TableForeignKey({
+                name: 'EnrollmentCreatedBy',
+                columnNames: ['created_by'],
+                referencedColumnNames: ['id'],
+                referencedTableName: 'users',
+                onDelete: 'SET NULL',
+                onUpdate: 'CASCADE',
+            }),
+        )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropForeignKey('enrollments', 'UserEnrollment')
         await queryRunner.dropForeignKey('enrollments', 'CourseEnrollment')
+        await queryRunner.dropForeignKey('enrollments', 'EnrollmentCreatedBy')
         await queryRunner.dropTable('enrollments')
     }
 

@@ -40,6 +40,12 @@ export class UsersTable1606682510413 implements MigrationInterface {
                         isNullable: false,
                     },
                     {
+                        name: 'created_by',
+                        type: 'integer',
+                        isNullable: false,
+                        default: 0
+                    },
+                    {
                         name: 'created_at',
                         type: 'timestamp',
                         default: 'now()',

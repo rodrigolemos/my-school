@@ -26,6 +26,9 @@ class User {
   @Column('varchar')
   role?: string
 
+  @Column('integer')
+  created_by?: number
+
   @CreateDateColumn()
   created_at?: Date
 

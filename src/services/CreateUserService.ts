@@ -1,5 +1,6 @@
 import { getRepository } from 'typeorm'
 import User from '../models/User'
+import { checkPermission } from '../middlewares/ensurePermission'
 import AppError from '../utils/AppError'
 import { generateHash } from '../utils/Hash'
 
@@ -9,12 +10,13 @@ interface IRequest {
   email: string
   password: string
   role: string
+  created_by?: number
 }
 
 class CreateUserService {
 
   public async execute(body: IRequest): Promise<User> {
-    const { name, birth_date, email, password, role } = body
+    const { name, birth_date, email, password, role, created_by } = body
     const userRepository = getRepository(User)
 
     const userRegistered = await userRepository.findOne({
@@ -28,17 +30,34 @@ class CreateUserService {
 
     const criptPassword = await generateHash(password)
 
-    const user = userRepository.create({
+    // If the user signs up, the field created_by
+    // is recorded with the default value = 0
+    let userBody: IRequest = {
       name,
       birth_date,
       email,
       role,
       password: criptPassword
-    })
+    }
+
+    // Check permissions
+    if (created_by) {
+      if (!await checkPermission(created_by))
+        throw new AppError('Unauthorized', 401)
+
+      userBody.created_by = created_by
+    }
+
+    // An admin can only be created by another admin
+    if (role === 'admin' && !created_by)
+      throw new AppError('Unauthorized', 401)
+
+    const user = userRepository.create(userBody)
 
     await userRepository.save(user)
 
     delete user.password
+    delete user.created_by
 
     return user
   }

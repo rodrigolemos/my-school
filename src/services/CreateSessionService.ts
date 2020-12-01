@@ -37,8 +37,8 @@ class CreateSessionService {
       throw new AppError('Internal server error', 500)
 
     const token = sign({}, secret, {
-      subject: userRegistered.email,
-      expiresIn,
+      subject: String(userRegistered.id),
+      expiresIn
     })
 
     return { email, token }
