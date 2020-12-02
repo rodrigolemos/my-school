@@ -22,6 +22,11 @@ class Enrollment {
   @JoinColumn({ name: 'course_id' })
   course_id?: number
 
+  @PrimaryColumn('integer')
+  @ManyToOne(() => User, user => user.id)
+  @JoinColumn({ name: 'user_id' })
+  created_by?: number
+
   @CreateDateColumn()
   created_at?: Date;
 
