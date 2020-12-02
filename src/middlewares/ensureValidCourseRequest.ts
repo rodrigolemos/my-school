@@ -19,5 +19,9 @@ export const setCourseFormat = checkSchema({
         return ['m', 'e', 'n'].indexOf(value.toLowerCase()) >= 0
       }
     }
+  },
+  created_by: {
+    errorMessage: 'Please inform who is creating the course',
+    isNumeric: true
   }
 })

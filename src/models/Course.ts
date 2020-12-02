@@ -17,6 +17,9 @@ class Course {
   @Column('varchar')
   period?: string
 
+  @Column('integer')
+  created_by?: number
+
   @CreateDateColumn()
   created_at?: Date
 

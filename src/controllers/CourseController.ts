@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import ListCoursesService from '../services/ListCoursesService'
+import CreateCourseService from '../services/CreateCourseService'
 
 class CourseController {
 
@@ -10,7 +11,9 @@ class CourseController {
   }
 
   public async store(req: Request, res: Response): Promise<Response> {
-    return res.send({ hello: 'world' })
+    const createCourseService = new CreateCourseService()
+    const course = await createCourseService.execute(req.body)
+    return res.status(201).send(course)
   }
 
 }
