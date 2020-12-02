@@ -3,8 +3,8 @@ import Enrollment from '../models/Enrollment'
 import AppError from '../utils/AppError'
 
 interface IRequest {
-  user_id?: string
-  course_id?: string
+  user_id?: number
+  course_id?: number
 }
 
 class ListEnrollmentsService {

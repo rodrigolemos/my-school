@@ -1,11 +1,25 @@
 import { getRepository } from 'typeorm'
 import User from '../models/User'
+import AppError from '../utils/AppError'
 
+interface IRequest {
+  id?: number
+}
 class ListUsersService {
 
-  public async execute(): Promise<User[]> {
+  public async execute(params: IRequest): Promise<User[]> {
     const userRepository = getRepository(User)
-    const users = await userRepository.find()
+
+    const where: IRequest = {}
+
+    if (params.id)
+      where.id = params.id
+
+    const users = await userRepository.find({ where })
+
+    if (!users.length)
+      throw new AppError('Users not found for this filter', 404)
+
     const foundUsers = users.map(user => {
       delete user.password
       return user

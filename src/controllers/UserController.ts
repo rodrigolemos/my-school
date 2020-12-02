@@ -5,9 +5,9 @@ import CreateUserService from '../services/CreateUserService'
 
 class UserController {
 
-  public async index(_: Request, res: Response): Promise<Response> {
+  public async index(req: Request, res: Response): Promise<Response> {
     const listUsersService = new ListUsersService()
-    const users = await listUsersService.execute()
+    const users = await listUsersService.execute(req.params)
     return res.send(users)
   }
 

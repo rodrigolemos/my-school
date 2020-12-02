@@ -1,8 +1,9 @@
 import { getRepository } from 'typeorm'
 import Course from '../models/Course'
+import AppError from '../utils/AppError'
 
 interface IRequest {
-  id?: string
+  id?: number
 }
 
 class ListCoursesService {
@@ -16,6 +17,10 @@ class ListCoursesService {
       where.id = params.id
 
     const courses = await courseRepository.find({ where })
+
+    if (!courses.length)
+      throw new AppError('Courses not found for this filter', 404)
+
     const foundCourses = courses.map(course => {
       delete course.created_by
       return course
