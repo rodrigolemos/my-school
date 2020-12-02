@@ -6,7 +6,7 @@ class EnrollmentController {
 
   public async index(req: Request, res: Response): Promise<Response> {
     const listEnrollmentsService = new ListEnrollmentsService()
-    const enrollments = await listEnrollmentsService.execute()
+    const enrollments = await listEnrollmentsService.execute(req.query)
     return res.send(enrollments)
   }
 
