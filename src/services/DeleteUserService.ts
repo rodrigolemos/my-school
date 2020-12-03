@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm'
 import Enrollment from '../models/Enrollment'
 import User from '../models/User'
-import AppError from '../utils/AppError'
+import AppError from '../errors/AppError'
 
 class DeleteUserService {
 

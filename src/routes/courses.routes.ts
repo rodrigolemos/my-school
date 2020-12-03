@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import ensureAuthentication from '../middlewares/ensureAuthentication'
 import ensurePermission from '../middlewares/ensurePermission'
-import { handleRouteError } from '../utils/RouteError'
+import { handleRouteError } from '../errors/RouteError'
 import { setCourseFormat } from '../middlewares/ensureValidCourseRequest'
 import CourseController from '../controllers/CourseController'
 

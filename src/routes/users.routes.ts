@@ -2,7 +2,7 @@ import { Router } from 'express'
 import ensureAuthentication from '../middlewares/ensureAuthentication'
 import ensurePermission from '../middlewares/ensurePermission'
 import ensureOnlyItself from '../middlewares/ensureOnlyItself'
-import { handleRouteError } from '../utils/RouteError'
+import { handleRouteError } from '../errors/RouteError'
 import { setAddUserFormat, setUpdateUserFormat, setDeleteUserFormat } from '../middlewares/ensureValidUserRequest'
 import UserController from '../controllers/UserController'
 

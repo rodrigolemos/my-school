@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { getRepository } from 'typeorm'
 import User from '../models/User'
-import AppError from '../utils/AppError'
+import AppError from '../errors/AppError'
 
 export async function checkPermission(client_id: string | number): Promise<boolean> {
   if (!client_id)

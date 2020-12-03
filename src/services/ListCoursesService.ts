@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm'
 import Course from '../models/Course'
-import AppError from '../utils/AppError'
+import AppError from '../errors/AppError'
 
 interface IRequest {
   id?: number

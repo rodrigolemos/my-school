@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import ensureAuthentication from '../middlewares/ensureAuthentication'
 import ensurePermission from '../middlewares/ensurePermission'
-import { handleRouteError } from '../utils/RouteError'
+import { handleRouteError } from '../errors/RouteError'
 import { setEnrollmentFormat } from '../middlewares/ensureValidEnrollmentRequest'
 import EnrollmentController from '../controllers/EnrollmentController'
 

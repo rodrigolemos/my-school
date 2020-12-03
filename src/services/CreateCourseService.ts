@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm'
 import Course from '../models/Course'
 import { checkPermission } from '../middlewares/ensurePermission'
-import AppError from '../utils/AppError'
+import AppError from '../errors/AppError'
 
 interface IRequest {
   name: string

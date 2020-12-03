@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm'
 import Enrollment from '../models/Enrollment'
-import AppError from '../utils/AppError'
+import AppError from '../errors/AppError'
 
 interface IRequest {
   user_id?: number
