@@ -3,6 +3,7 @@ import { Request, Response } from 'express'
 import ListUsersService from '../services/ListUsersService'
 import CreateUserService from '../services/CreateUserService'
 import UpdateUserService from '../services/UpdateUserService'
+import DeleteUserService from '../services/DeleteUserService'
 
 class UserController {
 
@@ -22,6 +23,12 @@ class UserController {
     const updateUserService = new UpdateUserService()
     const user = await updateUserService.execute(req.body)
     return res.send(user)
+  }
+
+  public async delete(req: Request, res: Response): Promise<Response> {
+    const deleteUserService = new DeleteUserService()
+    await deleteUserService.execute(req.params.id)
+    return res.status(204).send()
   }
 
 }

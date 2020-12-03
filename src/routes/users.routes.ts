@@ -3,7 +3,7 @@ import ensureAuthentication from '../middlewares/ensureAuthentication'
 import ensurePermission from '../middlewares/ensurePermission'
 import ensureOnlyItself from '../middlewares/ensureOnlyItself'
 import { handleRouteError } from '../utils/RouteError'
-import { setAddUserFormat, setUpdateUserFormat } from '../middlewares/ensureValidUserRequest'
+import { setAddUserFormat, setUpdateUserFormat, setDeleteUserFormat } from '../middlewares/ensureValidUserRequest'
 import UserController from '../controllers/UserController'
 
 const usersRouter = Router()
@@ -18,5 +18,8 @@ usersRouter.put('/', ensureOnlyItself, setUpdateUserFormat, handleRouteError, Us
 
 // Only logged in admins can view users
 usersRouter.get('/:id?', ensurePermission, UserController.index)
+
+// Only logged in admins can delete an user
+usersRouter.delete('/:id', ensurePermission, setDeleteUserFormat, handleRouteError, UserController.delete)
 
 export default usersRouter

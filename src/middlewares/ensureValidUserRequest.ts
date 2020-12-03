@@ -63,3 +63,12 @@ export const setUpdateUserFormat = checkSchema({
     optional: true
   }
 })
+
+export const setDeleteUserFormat = checkSchema({
+  id: {
+    errorMessage: 'User id must be provided',
+    isLength: {
+      options: { min: 3 }
+    }
+  }
+})
