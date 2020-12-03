@@ -20,11 +20,7 @@ class ListUsersService {
     if (!users.length)
       throw new AppError('Users not found for this filter', 404)
 
-    const foundUsers = users.map(user => {
-      delete user.password
-      return user
-    })
-    return foundUsers
+    return users
   }
 
 }

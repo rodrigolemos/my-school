@@ -20,7 +20,7 @@ class User {
   @Column('varchar')
   email?: string
 
-  @Column('varchar')
+  @Column('varchar', { select: false })
   password?: string
 
   @Column('varchar')

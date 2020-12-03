@@ -13,7 +13,7 @@ import User from './User';
 @Entity('enrollments')
 class Enrollment {
   @PrimaryColumn('integer')
-  @ManyToOne(() => User, user => user.id)
+  @ManyToOne(() => User, user => user.id, { eager: true })
   @JoinColumn({ name: 'user_id' })
   user_id?: number
 
