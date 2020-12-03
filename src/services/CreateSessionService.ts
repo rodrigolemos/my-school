@@ -2,7 +2,7 @@ import { getRepository } from 'typeorm'
 import User from '../models/User'
 import AppError from '../utils/AppError'
 
-import { compareHash } from '../utils/Hash'
+import { compareHash } from '../config/hash'
 import { sign } from 'jsonwebtoken'
 import authConfig from '../config/auth'
 

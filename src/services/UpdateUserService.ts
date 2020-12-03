@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm'
 import User from '../models/User'
 import AppError from '../utils/AppError'
-import { generateHash } from '../utils/Hash'
+import { generateHash } from '../config/hash'
 
 interface IRequest {
   id: string

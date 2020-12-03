@@ -3,10 +3,6 @@ import Enrollment from '../models/Enrollment'
 import User from '../models/User'
 import AppError from '../utils/AppError'
 
-interface IRequest {
-  id: string
-}
-
 class DeleteUserService {
 
   public async execute(id: string): Promise<boolean> {

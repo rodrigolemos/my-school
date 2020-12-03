@@ -2,7 +2,7 @@ import { getRepository } from 'typeorm'
 import User from '../models/User'
 import { checkPermission } from '../middlewares/ensurePermission'
 import AppError from '../utils/AppError'
-import { generateHash } from '../utils/Hash'
+import { generateHash } from '../config/hash'
 
 interface IRequest {
   name: string
