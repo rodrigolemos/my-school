@@ -8,7 +8,7 @@ import {
 
 @Entity('users')
 class User {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryGeneratedColumn('uuid')
   id?: number
 
   @Column('varchar')
@@ -26,7 +26,7 @@ class User {
   @Column('varchar')
   role?: string
 
-  @Column('integer')
+  @Column('uuid')
   created_by?: number
 
   @CreateDateColumn()

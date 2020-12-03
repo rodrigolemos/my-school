@@ -24,6 +24,8 @@ export const setCourseFormat = checkSchema({
   },
   created_by: {
     errorMessage: 'Please inform who is creating the course',
-    isNumeric: true
+    isLength: {
+      options: { min: 3 }
+    }
   }
 })

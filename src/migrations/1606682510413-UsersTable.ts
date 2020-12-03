@@ -3,16 +3,17 @@ import { MigrationInterface, QueryRunner, Table } from "typeorm";
 export class UsersTable1606682510413 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`)
         await queryRunner.createTable(
             new Table({
                 name: 'users',
                 columns: [
                     {
                         name: 'id',
-                        type: 'integer',
+                        type: 'uuid',
                         isPrimary: true,
-                        isGenerated: true,
-                        generationStrategy: 'increment',
+                        generationStrategy: 'uuid',
+                        default: 'uuid_generate_v4()',
                     },
                     {
                         name: 'name',
@@ -41,9 +42,8 @@ export class UsersTable1606682510413 implements MigrationInterface {
                     },
                     {
                         name: 'created_by',
-                        type: 'integer',
-                        isNullable: false,
-                        default: 0
+                        type: 'uuid',
+                        isNullable: true
                     },
                     {
                         name: 'created_at',

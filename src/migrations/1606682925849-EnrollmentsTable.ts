@@ -3,25 +3,26 @@ import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm
 export class EnrollmentsTable1606682925849 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`)
         await queryRunner.createTable(
             new Table({
                 name: 'enrollments',
                 columns: [
                     {
                         name: 'user_id',
-                        type: 'integer',
+                        type: 'uuid',
                         isPrimary: true,
                         isNullable: false,
                     },
                     {
                         name: 'course_id',
-                        type: 'integer',
+                        type: 'uuid',
                         isPrimary: true,
                         isNullable: false,
                     },
                     {
                         name: 'created_by',
-                        type: 'integer',
+                        type: 'uuid',
                         isNullable: false
                     },
                     {
