@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 
 import ListUsersService from '../services/ListUsersService'
 import CreateUserService from '../services/CreateUserService'
+import UpdateUserService from '../services/UpdateUserService'
 
 class UserController {
 
@@ -15,6 +16,12 @@ class UserController {
     const createUserService = new CreateUserService()
     const user = await createUserService.execute(req.body)
     return res.status(201).send(user)
+  }
+
+  public async update(req: Request, res: Response): Promise<Response> {
+    const updateUserService = new UpdateUserService()
+    const user = await updateUserService.execute(req.body)
+    return res.send(user)
   }
 
 }
