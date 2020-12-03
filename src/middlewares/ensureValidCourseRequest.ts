@@ -1,12 +1,14 @@
 import { checkSchema } from 'express-validator'
 
 export const setCourseFormat = checkSchema({
-  id: {
-    errorMessage: 'Course id must be at an integer number',
-    isNumeric: true
-  },
   name: {
     errorMessage: 'Please enter a valid name',
+    isLength: {
+      options: { min: 3 }
+    }
+  },
+  description: {
+    errorMessage: 'Please enter a valid description',
     isLength: {
       options: { min: 3 }
     }

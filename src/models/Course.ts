@@ -15,6 +15,9 @@ class Course {
   name?: string
 
   @Column('varchar')
+  description?: string
+
+  @Column('varchar')
   period?: string
 
   @Column('integer')

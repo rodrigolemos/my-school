@@ -20,6 +20,11 @@ export class CoursesTable1606682807239 implements MigrationInterface {
                         isNullable: false,
                     },
                     {
+                        name: 'description',
+                        type: 'varchar',
+                        isNullable: false,
+                    },
+                    {
                         name: 'period',
                         type: 'varchar',
                         length: '1',
