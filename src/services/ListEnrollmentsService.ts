@@ -2,11 +2,13 @@ import { getRepository } from 'typeorm'
 import Enrollment from '../models/Enrollment'
 import AppError from '../errors/AppError'
 import FindUserByEmail from './FindUserByEmail'
+import FindCourseByName from './FindCourseByName'
 
 interface IRequest {
   user_id?: number
   course_id?: number
   user_email?: string
+  course_name?: string
 }
 
 class ListEnrollmentsService {
@@ -20,6 +22,12 @@ class ListEnrollmentsService {
       const findUserByEmailService = new FindUserByEmail()
       const user = await findUserByEmailService.execute(query.user_email)
       query.user_id = user.id
+    }
+
+    if (query.course_name && !query.course_id) {
+      const findCourseByNameService = new FindCourseByName()
+      const course = await findCourseByNameService.execute(query.course_name)
+      query.course_id = course.id
     }
 
     if (query.user_id)
