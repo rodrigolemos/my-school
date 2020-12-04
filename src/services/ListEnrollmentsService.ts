@@ -20,7 +20,7 @@ class ListEnrollmentsService {
     if (query.course_id)
       where.course_id = query.course_id
 
-    const enrollments = await enrollmentRepository.find({ where })
+    const enrollments = await enrollmentRepository.find({ where, order: { updated_at: 'DESC' } })
 
     if (!enrollments.length)
       throw new AppError('Enrollments not found for this filter', 404)
