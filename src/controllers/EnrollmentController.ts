@@ -1,6 +1,8 @@
 import { Request, Response } from 'express'
+
 import ListEnrollmentsService from '../services/ListEnrollmentsService'
 import CreateEnrollmentService from '../services/CreateEnrollmentService'
+import DeleteEnrollmentService from '../services/DeleteEnrollmentService'
 
 class EnrollmentController {
 
@@ -14,6 +16,12 @@ class EnrollmentController {
     const createEnrollmentService = new CreateEnrollmentService()
     const enrollment = await createEnrollmentService.execute(req.body)
     return res.send(enrollment)
+  }
+
+  public async delete(req: Request, res: Response): Promise<Response> {
+    const deleteEnrollmentService = new DeleteEnrollmentService()
+    await deleteEnrollmentService.execute(req.body)
+    return res.status(204).send()
   }
 
 }

@@ -13,5 +13,6 @@ enrollmentsRouter.use(ensurePermission)
 
 enrollmentsRouter.get('/', EnrollmentController.index)
 enrollmentsRouter.post('/create', setEnrollmentFormat, handleRouteError, EnrollmentController.store)
+enrollmentsRouter.delete('/', setEnrollmentFormat, handleRouteError, EnrollmentController.delete)
 
 export default enrollmentsRouter

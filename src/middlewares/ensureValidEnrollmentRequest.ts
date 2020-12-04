@@ -2,15 +2,15 @@ import { checkSchema } from 'express-validator'
 
 export const setEnrollmentFormat = checkSchema({
   user_id: {
-    errorMessage: 'User id must be at an integer number',
+    errorMessage: 'User id must be provided',
     isLength: {
-      options: { min: 3 }
+      options: { min: 10 }
     }
   },
   course_id: {
-    errorMessage: 'Course id must be at an integer number',
+    errorMessage: 'Course id must be provided',
     isLength: {
-      options: { min: 3 }
+      options: { min: 10 }
     }
   }
 })
