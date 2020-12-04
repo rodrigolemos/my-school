@@ -11,7 +11,6 @@ const enrollmentsRouter = Router()
 enrollmentsRouter.use(ensureAuthentication)
 enrollmentsRouter.use(ensurePermission)
 
-// TODO: filter by course or user
 enrollmentsRouter.get('/', EnrollmentController.index)
 enrollmentsRouter.post('/create', setEnrollmentFormat, handleRouteError, EnrollmentController.store)
 

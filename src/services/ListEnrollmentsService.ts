@@ -1,10 +1,12 @@
 import { getRepository } from 'typeorm'
 import Enrollment from '../models/Enrollment'
 import AppError from '../errors/AppError'
+import FindUserByEmail from './FindUserByEmail'
 
 interface IRequest {
   user_id?: number
   course_id?: number
+  user_email?: string
 }
 
 class ListEnrollmentsService {
@@ -13,6 +15,12 @@ class ListEnrollmentsService {
     const enrollmentRepository = getRepository(Enrollment)
 
     const where: IRequest = {}
+
+    if (query.user_email && !query.user_id) {
+      const findUserByEmailService = new FindUserByEmail()
+      const user = await findUserByEmailService.execute(query.user_email)
+      query.user_id = user.id
+    }
 
     if (query.user_id)
       where.user_id = query.user_id
