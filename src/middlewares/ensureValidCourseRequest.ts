@@ -1,6 +1,6 @@
 import { checkSchema } from 'express-validator'
 
-export const setCourseFormat = checkSchema({
+export const setAddCourseFormat = checkSchema({
   name: {
     errorMessage: 'Please enter a valid name',
     isLength: {
@@ -27,5 +27,28 @@ export const setCourseFormat = checkSchema({
     isLength: {
       options: { min: 3 }
     }
+  }
+})
+
+export const setUpdateCourseFormat = checkSchema({
+  id: {
+    errorMessage: 'Course id must be provided',
+    isLength: {
+      options: { min: 3 }
+    }
+  },
+  name: {
+    errorMessage: 'Please enter a valid name',
+    isLength: {
+      options: { min: 3 }
+    },
+    optional: true
+  },
+  description: {
+    errorMessage: 'Please enter a valid description',
+    isLength: {
+      options: { min: 3 }
+    },
+    optional: true
   }
 })
