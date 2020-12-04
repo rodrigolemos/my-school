@@ -52,3 +52,12 @@ export const setUpdateCourseFormat = checkSchema({
     optional: true
   }
 })
+
+export const setDeleteCourseFormat = checkSchema({
+  id: {
+    errorMessage: 'Course id must be provided',
+    isLength: {
+      options: { min: 3 }
+    }
+  }
+})
