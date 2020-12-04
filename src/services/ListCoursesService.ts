@@ -16,7 +16,7 @@ class ListCoursesService {
     if (params.id)
       where.id = params.id
 
-    const courses = await courseRepository.find({ where })
+    const courses = await courseRepository.find({ where, order: { name: 'ASC' } })
 
     if (!courses.length)
       throw new AppError('Courses not found for this filter', 404)

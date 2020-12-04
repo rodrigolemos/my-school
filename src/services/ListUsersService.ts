@@ -15,7 +15,7 @@ class ListUsersService {
     if (params.id)
       where.id = params.id
 
-    const users = await userRepository.find({ where })
+    const users = await userRepository.find({ where, order: { name: 'ASC' } })
 
     if (!users.length)
       throw new AppError('Users not found for this filter', 404)
