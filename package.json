@@ -4,7 +4,8 @@
   "description": "A simple typescript API",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/app.ts"
+    "dev": "nodemon src/app.ts",
+    "typeorm": "ts-node ./node_modules/typeorm/cli.js"
   },
   "author": "Rodrigo Lemos",
   "license": "ISC",
