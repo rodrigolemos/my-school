@@ -6,7 +6,6 @@ import { generateHash } from '../config/hash'
 
 interface IRequest {
   name: string
-  birth_date: Date
   email: string
   password: string
   role: string
@@ -16,7 +15,7 @@ interface IRequest {
 class CreateUserService {
 
   public async execute(body: IRequest): Promise<User> {
-    const { name, birth_date, email, password, role, created_by } = body
+    const { name, email, password, role, created_by } = body
     const userRepository = getRepository(User)
 
     const userRegistered = await userRepository.findOne({
@@ -34,7 +33,6 @@ class CreateUserService {
     // is recorded with the default value = 0
     let userBody: IRequest = {
       name,
-      birth_date,
       email,
       role,
       password: criptPassword

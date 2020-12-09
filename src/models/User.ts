@@ -14,9 +14,6 @@ class User {
   @Column('varchar')
   name?: string
 
-  @Column('date')
-  birth_date?: Date
-
   @Column('varchar')
   email?: string
 

@@ -21,11 +21,6 @@ export class UsersTable1606682510413 implements MigrationInterface {
                         isNullable: false,
                     },
                     {
-                        name: 'birth_date',
-                        type: 'date',
-                        isNullable: false,
-                    },
-                    {
                         name: 'email',
                         type: 'varchar',
                         isNullable: false,
@@ -40,6 +35,7 @@ export class UsersTable1606682510413 implements MigrationInterface {
                         name: 'role',
                         type: 'varchar',
                         isNullable: false,
+                        default: "'student'"
                     },
                     {
                         name: 'created_by',
