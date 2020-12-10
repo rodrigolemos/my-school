@@ -18,7 +18,7 @@ class CreateSessionService {
     const userRepository = getRepository(User)
 
     const userRegistered = await userRepository.findOne({
-      select: ['id', 'password'],
+      select: ['id', 'password', 'role'],
       where: {
         email
       }
@@ -42,7 +42,9 @@ class CreateSessionService {
       expiresIn
     })
 
-    return { email, token }
+    const { role } = userRegistered
+
+    return { role, email, token }
   }
 
 }
