@@ -19,6 +19,9 @@ usersRouter.put('/', ensureOnlyItself, setUpdateUserFormat, handleRouteError, Us
 // Only logged in admins can view users
 usersRouter.get('/:id?', ensurePermission, UserController.index)
 
+// Only the own user can see its information
+usersRouter.get('/about/:id', ensureOnlyItself, UserController.index)
+
 // Only logged in admins can delete an user
 usersRouter.delete('/:id', ensurePermission, setDeleteUserFormat, handleRouteError, UserController.delete)
 
