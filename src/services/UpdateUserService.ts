@@ -1,4 +1,4 @@
-import { getRepository } from 'typeorm'
+import { getRepository, Not } from 'typeorm'
 import User from '../models/User'
 import AppError from '../errors/AppError'
 import { generateHash } from '../config/hash'
@@ -28,8 +28,21 @@ class UpdateUserService {
     if (name)
       userRegistered.name = name
 
-    if (email)
+    // Check if user is trying to change its email
+    // to one that was already used
+    if (email) {
+        const userRegisteredWithEmail = await userRepository.findOne({
+        where: {
+          id: Not(id),
+          email
+        }
+      })
+  
+      if (userRegisteredWithEmail)
+        throw new AppError('Email address already used', 400)
+      
       userRegistered.email = email
+    }
 
     if (password)
       userRegistered.password = await generateHash(password)
