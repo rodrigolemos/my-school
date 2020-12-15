@@ -8,12 +8,14 @@ interface IRequest {
   name?: string
   email?: string
   password?: string
+  contact?: string
+  bio?: string
 }
 
 class UpdateUserService {
 
   public async execute(body: IRequest): Promise<User> {
-    const { id, name, email, password } = body
+    const { id, name, email, password, contact, bio } = body
     const userRepository = getRepository(User)
 
     const userRegistered = await userRepository.findOne({
@@ -46,6 +48,10 @@ class UpdateUserService {
 
     if (password)
       userRegistered.password = await generateHash(password)
+
+    userRegistered.contact = contact ? contact : undefined
+    
+    userRegistered.bio = bio ? bio : undefined
 
     userRegistered.updated_at = new Date()
 

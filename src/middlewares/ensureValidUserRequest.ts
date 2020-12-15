@@ -46,7 +46,17 @@ export const setUpdateUserFormat = checkSchema({
       options: { min: 6 }
     },
     optional: true
-  }
+  },
+  contact: {
+    errorMessage: 'Contact should be at least 3 chars long',
+    trim: true,
+    optional: true
+  },
+  bio: {
+    errorMessage: 'Bio should be at least 3 chars long',
+    trim: true,
+    optional: true
+  },
 })
 
 export const setDeleteUserFormat = checkSchema({

@@ -23,6 +23,12 @@ class User {
   @Column('varchar')
   role?: string
 
+  @Column('varchar')
+  contact?: string
+  
+  @Column('varchar')
+  bio?: string
+
   @Column('uuid')
   created_by?: number
 
