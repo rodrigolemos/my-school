@@ -31,7 +31,7 @@ class UpdateUserService {
     // Check if user is trying to change its email
     // to one that was already used
     if (email) {
-        const userRegisteredWithEmail = await userRepository.findOne({
+      const userRegisteredWithEmail = await userRepository.findOne({
         where: {
           id: Not(id),
           email
