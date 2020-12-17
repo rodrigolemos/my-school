@@ -7,8 +7,8 @@ import {
   ManyToOne,
 } from 'typeorm';
 
-import Course from './Course';
-import User from './User';
+import Course from './Course'
+import User from './User'
 
 @Entity('enrollments')
 class Enrollment {
