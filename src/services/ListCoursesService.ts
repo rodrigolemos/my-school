@@ -21,11 +21,7 @@ class ListCoursesService {
     if (!courses.length)
       throw new AppError('Courses not found for this filter', 404)
 
-    const foundCourses = courses.map(course => {
-      delete course.created_by
-      return course
-    })
-    return foundCourses
+    return courses
   }
 
 }
