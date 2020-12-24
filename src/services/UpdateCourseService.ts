@@ -7,12 +7,13 @@ interface IRequest {
   id: string
   name?: string
   description?: string
+  positions?: number
 }
 
 class UpdateCourseService {
 
   public async execute(body: IRequest): Promise<Course> {
-    const { id, name, description } = body
+    const { id, name, description, positions } = body
     const courseRepository = getRepository(Course)
 
     const courseRegistered = await courseRepository.findOne({
@@ -29,6 +30,9 @@ class UpdateCourseService {
 
     if (description)
       courseRegistered.description = description
+
+    if (positions)
+      courseRegistered.positions = positions
 
     courseRegistered.updated_at = new Date()
 

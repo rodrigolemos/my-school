@@ -22,6 +22,10 @@ export const setAddCourseFormat = checkSchema({
       }
     }
   },
+  positions: {
+    errorMessage: 'Please enter an integer and positive positions number',
+    isInt: true,
+  },
   created_by: {
     errorMessage: 'Please inform who is creating the course',
     isLength: {
@@ -50,7 +54,12 @@ export const setUpdateCourseFormat = checkSchema({
       options: { min: 3 }
     },
     optional: true
-  }
+  },
+  positions: {
+    errorMessage: 'Please enter an integer and positive positions number',
+    isInt: true,
+    optional: true
+  },
 })
 
 export const setDeleteCourseFormat = checkSchema({

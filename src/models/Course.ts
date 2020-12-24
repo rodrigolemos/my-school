@@ -24,6 +24,9 @@ class Course {
   period?: string
 
   @Column('integer')
+  positions?: number
+
+  @Column('integer')
   @OneToOne(() => User, user => user.id, { eager: true })
   @JoinColumn({ name: 'created_by' })
   created_by?: number
