@@ -30,6 +30,14 @@ class CreateEnrollmentService {
 
     if (!course)
       throw new AppError('Course not found', 404)
+    
+    // Validade course positions
+    if (course.positions) {
+      if (course.positions === 0)
+        throw new AppError('There are no open positions to this course', 400)
+
+      course.positions = course.positions - 1
+    }
 
     // Check if user does exist
     // Check if user can be enrolled to a course
@@ -77,6 +85,11 @@ class CreateEnrollmentService {
     const enrollment = enrollmentRepository.create(enrollmentBody)
 
     await enrollmentRepository.save(enrollment)
+
+    // Update course positions
+    const updatedPositionsCourse = courseRepository.create(course)
+
+    await courseRepository.save(updatedPositionsCourse)
 
     return enrollment
   }
