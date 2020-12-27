@@ -15,7 +15,7 @@ export class AddColumnToEnrollment1609102538124 implements MigrationInterface {
             {
                 name: 'approved_by',
                 type: 'uuid',
-                isNullable: false
+                isNullable: true
             }
         ))
         await queryRunner.createForeignKey(
