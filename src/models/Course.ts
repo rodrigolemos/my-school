@@ -26,6 +26,9 @@ class Course {
   @Column('integer')
   positions?: number
 
+  @Column('json')
+  tags?: object
+
   @Column('integer')
   @OneToOne(() => User, user => user.id, { eager: true })
   @JoinColumn({ name: 'created_by' })

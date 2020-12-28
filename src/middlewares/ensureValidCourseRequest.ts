@@ -26,6 +26,13 @@ export const setAddCourseFormat = checkSchema({
     errorMessage: 'Please enter an integer and positive positions number',
     isInt: true,
   },
+  tags: {
+    errorMessage: 'Please enter valid tags for this course',
+    isLength: {
+      options: { max: 200 }
+    },
+    optional: true
+  },
   created_by: {
     errorMessage: 'Please inform who is creating the course',
     isLength: {
@@ -58,6 +65,13 @@ export const setUpdateCourseFormat = checkSchema({
   positions: {
     errorMessage: 'Please enter an integer and positive positions number',
     isInt: true,
+    optional: true
+  },
+  tags: {
+    errorMessage: 'Please enter valid tags for this course',
+    isLength: {
+      options: { max: 200 }
+    },
     optional: true
   },
 })

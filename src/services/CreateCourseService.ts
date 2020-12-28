@@ -8,13 +8,14 @@ interface IRequest {
   description: string
   period: string
   positions: number
+  tags?: string[]
   created_by: number
 }
 
 class CreateCourseService {
 
   public async execute(body: IRequest): Promise<Course> {
-    const { name, description, period, positions, created_by } = body
+    const { name, description, period, positions, created_by, tags } = body
 
     // Check permissions
     if (!await checkPermission(created_by))
@@ -32,7 +33,7 @@ class CreateCourseService {
     if (courseRegistered)
       throw new AppError('A course with this name/period is already registered', 400)
 
-    const course = courseRepository.create({ name, description, period, positions, created_by })
+    const course = courseRepository.create({ name, description, period, positions, created_by, tags })
 
     await courseRepository.save(course)
 
