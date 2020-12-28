@@ -87,9 +87,7 @@ class CreateEnrollmentService {
     await enrollmentRepository.save(enrollment)
 
     // Update course positions
-    const updatedPositionsCourse = courseRepository.create(course)
-
-    await courseRepository.save(updatedPositionsCourse)
+    await courseRepository.save(course)
 
     return enrollment
   }
