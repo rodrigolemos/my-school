@@ -15,7 +15,7 @@ class EnrollmentController {
   public async store(req: Request, res: Response): Promise<Response> {
     const createEnrollmentService = new CreateEnrollmentService()
     const enrollment = await createEnrollmentService.execute(req.body)
-    return res.send(enrollment)
+    return res.status(201).send(enrollment)
   }
 
   public async delete(req: Request, res: Response): Promise<Response> {
