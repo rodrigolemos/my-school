@@ -5,7 +5,7 @@ import AppError from '../errors/AppError'
 
 export async function checkPermission(client_id: string | number): Promise<boolean> {
   if (!client_id)
-    throw new AppError('Token was not provided', 403)
+    throw new AppError('Client id was not provided', 403)
 
   const user = await getRepository(User).findOne({
     where: {
