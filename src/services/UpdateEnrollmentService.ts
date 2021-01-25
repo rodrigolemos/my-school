@@ -76,7 +76,7 @@ class UpdateEnrollmentService {
 
     enrollmentFound.status = status
 
-    const response = await enrollmentRepository.update({ user_id, course_id }, enrollmentFound)
+    await enrollmentRepository.update({ user_id, course_id }, enrollmentFound)
 
     return enrollmentFound
   }
