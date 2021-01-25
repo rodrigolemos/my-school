@@ -3,6 +3,7 @@ import { Request, Response } from 'express'
 import ListEnrollmentsService from '../services/ListEnrollmentsService'
 import CreateEnrollmentService from '../services/CreateEnrollmentService'
 import DeleteEnrollmentService from '../services/DeleteEnrollmentService'
+import UpdateEnrollmentService from '../services/UpdateEnrollmentService'
 
 class EnrollmentController {
 
@@ -16,6 +17,12 @@ class EnrollmentController {
     const createEnrollmentService = new CreateEnrollmentService()
     const enrollment = await createEnrollmentService.execute(req.body)
     return res.status(201).send(enrollment)
+  }
+
+  public async update(req: Request, res: Response): Promise<Response> {
+    const updateEnrollmentService = new UpdateEnrollmentService()
+    const enrollment = await updateEnrollmentService.execute(req.body)
+    return res.send(enrollment)
   }
 
   public async delete(req: Request, res: Response): Promise<Response> {
