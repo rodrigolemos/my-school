@@ -14,7 +14,10 @@ class FindCourseByName {
     })
 
     if (!courseRegistered)
-      throw new AppError('Course not found', 404)
+      throw new AppError({
+        status: 1,
+        message: 'Course not found'
+      }, 404)
 
     return courseRegistered
   }

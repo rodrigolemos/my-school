@@ -19,7 +19,10 @@ class ListCoursesService {
     const courses = await courseRepository.find({ where, order: { name: 'ASC' } })
 
     if (!courses.length)
-      throw new AppError('Courses not found for this filter', 404)
+      throw new AppError({
+        status: 1,
+        message: 'Courses not found for this filter'
+      }, 404)
 
     return courses
   }

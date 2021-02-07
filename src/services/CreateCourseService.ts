@@ -19,7 +19,10 @@ class CreateCourseService {
 
     // Check permissions
     if (!await checkPermission(created_by))
-      throw new AppError('Unauthorized', 401)
+      throw new AppError({
+        status: 5,
+        message: 'Unauthorized'
+      }, 401)
 
     const courseRepository = getRepository(Course)
 
@@ -31,7 +34,10 @@ class CreateCourseService {
     })
 
     if (courseRegistered)
-      throw new AppError('A course with this name/period is already registered', 400)
+      throw new AppError({
+        status: 2,
+        message: 'A course with this name/period is already registered'
+      }, 400)
 
     const course = courseRepository.create({ name, description, period, positions, created_by, tags })
 

@@ -15,10 +15,11 @@ class DeleteCourseService {
       }
     })
 
-    console.log(id)
-
     if (!courseRegistered)
-      throw new AppError('Course not found', 404)
+      throw new AppError({
+        status: 1,
+        message: 'Course not found'
+      }, 404)
 
     const enrollments = await enrollmentsRepository.findOne({
       where: {
@@ -27,7 +28,10 @@ class DeleteCourseService {
     })
 
     if (enrollments)
-      throw new AppError('There are enrollments in this course. Before delete it, delete the enrollments.', 400)
+      throw new AppError({
+        status: 2,
+        message: 'There are enrollments in this course. Before delete it, delete the enrollments.'
+      }, 400)
 
     await courseRepository.delete(id)
 
