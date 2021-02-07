@@ -76,6 +76,9 @@ class UpdateEnrollmentService {
 
     enrollmentFound.status = status
 
+    // Update course positions
+    await courseRepository.save(course)
+
     await enrollmentRepository.update({ user_id, course_id }, enrollmentFound)
 
     return enrollmentFound

@@ -35,8 +35,6 @@ class CreateEnrollmentService {
     if (course.positions) {
       if (course.positions === 0)
         throw new AppError('There are no open positions to this course', 400)
-
-      course.positions = course.positions - 1
     }
 
     // Check if user does exist
@@ -85,9 +83,6 @@ class CreateEnrollmentService {
     const enrollment = enrollmentRepository.create(enrollmentBody)
 
     await enrollmentRepository.save(enrollment)
-
-    // Update course positions
-    await courseRepository.save(course)
 
     return enrollment
   }
