@@ -49,10 +49,15 @@ class UpdateEnrollmentService {
     // Validade course positions
     if (user.role === 'student') {
       if (course.positions) {
-        if (course.positions === 0)
-          throw new AppError('There are no open positions to this course', 400)
-  
-        course.positions = course.positions - 1
+        // If its enrollment is approved
+        if (status === 'A') {
+          if (course.positions === 0)
+            throw new AppError('There are no open positions to this course', 400)
+          
+          course.positions = course.positions - 1
+        } else {
+          course.positions = course.positions + 1
+        }
       }
     }
 
