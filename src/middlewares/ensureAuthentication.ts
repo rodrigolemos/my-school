@@ -14,7 +14,10 @@ export default function ensureAuthenticated(request: Request, _: Response, next:
   const authHeader = request.headers.authorization;
 
   if (!authHeader)
-    throw new AppError('Token was not provided', 401)
+    throw new AppError({
+      status: 1,
+      message: 'Token was not provided'
+    }, 401)
 
   const [, token] = authHeader.split(' ')
 
@@ -22,7 +25,10 @@ export default function ensureAuthenticated(request: Request, _: Response, next:
     const { secret } = authConfig.jwt
 
     if (!secret)
-      throw new AppError('Internal server error', 500)
+      throw new AppError({
+        status: 1,
+        message: 'Internal server error'
+      }, 500)
 
     const decoded = verify(token, secret)
 
@@ -32,6 +38,9 @@ export default function ensureAuthenticated(request: Request, _: Response, next:
 
     return next()
   } catch {
-    throw new AppError('Invalid token', 401)
+    throw new AppError({
+      status: 2,
+      message: 'Invalid token'
+    }, 401)
   }
 }
