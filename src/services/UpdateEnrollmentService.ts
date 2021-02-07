@@ -31,14 +31,6 @@ class UpdateEnrollmentService {
 
     if (!course)
       throw new AppError('Course not found', 404)
-    
-    // Validade course positions
-    if (course.positions) {
-      if (course.positions === 0)
-        throw new AppError('There are no open positions to this course', 400)
-
-      course.positions = course.positions - 1
-    }
 
     // Check if user does exist
     // Check if user can be enrolled to a course
@@ -53,6 +45,16 @@ class UpdateEnrollmentService {
 
     if (user.role !== 'student' && user.role !== 'teacher')
       throw new AppError('This user role is not allowed to be enrolled to a course', 400)
+    
+    // Validade course positions
+    if (user.role === 'student') {
+      if (course.positions) {
+        if (course.positions === 0)
+          throw new AppError('There are no open positions to this course', 400)
+  
+        course.positions = course.positions - 1
+      }
+    }
 
     // Check enrollment is pendent
     const enrollmentFound = await enrollmentRepository.findOne({
