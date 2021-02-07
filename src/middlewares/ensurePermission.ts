@@ -26,13 +26,13 @@ export default async function ensurePermission(request: Request, _: Response, ne
   try {
     if (typeof request.headers.client_id !== 'string')
       throw new AppError({
-        status: 1,
+        status: 3,
         message: 'Invalid client_id token'
       }, 401)
 
     if (!await checkPermission(request.headers.client_id))
       throw new AppError({
-        status: 2,
+        status: 4,
         message: 'Unauthorized'
       }, 401)
 
