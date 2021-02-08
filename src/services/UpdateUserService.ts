@@ -25,7 +25,10 @@ class UpdateUserService {
     })
 
     if (!userRegistered)
-      throw new AppError('User not found', 404)
+      throw new AppError({
+        status: 1,
+        message: 'User not found'
+      }, 404)
 
     if (name)
       userRegistered.name = name
@@ -41,7 +44,10 @@ class UpdateUserService {
       })
   
       if (userRegisteredWithEmail)
-        throw new AppError('Email address already used', 400)
+        throw new AppError({
+          status: 2,
+          message: 'Email address already used'
+        }, 400)
       
       userRegistered.email = email
     }

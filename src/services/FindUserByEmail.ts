@@ -14,7 +14,10 @@ class FindUserByEmail {
     })
 
     if (!userRegistered)
-      throw new AppError('User not found', 404)
+      throw new AppError({
+        status: 1,
+        message: 'User not found'
+      }, 404)
 
     return userRegistered
   }

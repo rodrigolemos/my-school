@@ -25,17 +25,26 @@ class CreateSessionService {
     })
 
     if (!userRegistered || !userRegistered.password)
-      throw new AppError('Incorrect e-mail or password', 401)
+      throw new AppError({
+        status: 1,
+        message: 'Incorrect e-mail or password'
+      }, 401)
 
     const validPassword = await compareHash(password, userRegistered.password)
 
     if (!validPassword)
-      throw new AppError('Incorrect e-mail or password', 401)
+      throw new AppError({
+        status: 1,
+        message: 'Incorrect e-mail or password'
+      }, 401)
 
     const { expiresIn, secret } = authConfig.jwt
 
     if (!secret)
-      throw new AppError('Internal server error', 500)
+      throw new AppError({
+        status: 1,
+        message: 'Internal server error'
+      }, 500)
 
     const token = sign({}, secret, {
       subject: String(userRegistered.id),

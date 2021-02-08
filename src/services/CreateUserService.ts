@@ -25,7 +25,10 @@ class CreateUserService {
     })
 
     if (userRegistered)
-      throw new AppError('Email address already used', 400)
+      throw new AppError({
+        status: 2,
+        message: 'Email address already used'
+      }, 400)
 
     const criptPassword = await generateHash(password)
 
@@ -41,14 +44,20 @@ class CreateUserService {
     // Check permissions
     if (created_by) {
       if (!await checkPermission(created_by))
-        throw new AppError('Unauthorized', 401)
+        throw new AppError({
+          status: 5,
+          message: 'Unauthorized'
+        }, 401)
 
       userBody.created_by = created_by
     }
 
     // An admin can only be created by another admin
     if (role === 'admin' && !created_by)
-      throw new AppError('Unauthorized', 401)
+      throw new AppError({
+        status: 6,
+        message: 'Unauthorized'
+      }, 401)
 
     const user = userRepository.create(userBody)
 

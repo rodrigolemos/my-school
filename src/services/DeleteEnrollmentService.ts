@@ -22,7 +22,10 @@ class DeleteEnrollmentService {
     })
 
     if (!enrollmentRegistered)
-      throw new AppError('Enrollment not found', 404)
+      throw new AppError({
+        status: 1,
+        message: 'Enrollment not found'
+      }, 404)
 
     await enrollmentRepository.delete({
       user_id,

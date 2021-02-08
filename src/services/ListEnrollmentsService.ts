@@ -39,7 +39,10 @@ class ListEnrollmentsService {
     const enrollments = await enrollmentRepository.find({ where, order: { updated_at: 'DESC' } })
 
     if (!enrollments.length)
-      throw new AppError('Enrollments not found for this filter', 404)
+      throw new AppError({
+        status: 1,
+        message: 'Enrollments not found for this filter'
+      }, 404)
 
     return enrollments
   }

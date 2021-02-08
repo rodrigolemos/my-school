@@ -18,7 +18,10 @@ class ListUsersService {
     const users = await userRepository.find({ where, order: { name: 'ASC' } })
 
     if (!users.length)
-      throw new AppError('Users not found for this filter', 404)
+      throw new AppError({
+        status: 1,
+        message: 'Users not found for this filter'
+      }, 404)
 
     return users
   }
