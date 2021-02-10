@@ -25,6 +25,14 @@ O projeto foi dividido em 4 partes separadas por níveis de usuário da seguinte
 
 - **Administrador** - Esse é o nível de maior privilégio logado. Administradores podem incluir, alterar, atualizar e excluir cursos; incluir ou atualizar acessos de professores e outros administradores; aprovar ou excluir matrículas em determinados cursos. Entretanto, administradores não podem estar matriculados em curso algum.
 
+## Layout
+
+Exemplo do design adotado para páginas públicas.
+
+<p align="left">
+  <img alt="Principal" src="https://github.com/rodrigolemos/my-school-front/blob/main/public/images/my-school.png" style="width: 1100px; margin-top: 10px; margin-right: 5px;">
+</p>
+
 ## Autor
 
 Rodrigo Lemos
