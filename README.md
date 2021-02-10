@@ -25,6 +25,8 @@ O projeto foi dividido em 4 partes separadas por níveis de usuário da seguinte
 
 - **Administrador** - Esse é o nível de maior privilégio logado. Administradores podem incluir, alterar, atualizar e excluir cursos; incluir ou atualizar acessos de professores e outros administradores; aprovar ou excluir matrículas em determinados cursos. Entretanto, administradores não podem estar matriculados em curso algum.
 
+Além disso, foi implantado um workflow de aprovação de matrícula mediante validação da administração. Nesse fluxo, um **aluno** ou **professor** se cadastra no curso escolhido e entra em uma fila, podendo iniciar o seu curso somente após a atualização do pedido, feita somente por um **administrador**.
+
 ## Layout
 
 Exemplo do design adotado para páginas públicas.
