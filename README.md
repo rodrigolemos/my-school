@@ -39,13 +39,39 @@ Além disso, foi implantado um workflow de aprovação de matrícula mediante va
 
 Como mencionado, este é um projeto de estudos e tem como premissa o aprendizado e a apresentação de tecnologias, frameworks e ferramentas de desenvolvimento. Segue a lista das principais libs utilizadas:
 
-- [TypeScript](https://www.typescriptlang.org/) - Uma extensão do JavaScript;
+- [NodeJS](https://nodejs.org/en/) - Servidor principal;
 - [Express](https://expressjs.com/) - Um framework web para Node.js;
 - [Express Validator](https://express-validator.github.io/docs/) - Middleware para validação de rotas;
+- [TypeScript](https://www.typescriptlang.org/) - Uma extensão do JavaScript;
 - [Helmet](https://helmetjs.github.io/) - Conjunto de validações de segurança para apps express;
 - [TypeORM](https://typeorm.io/) - Um dos ORMs mais populares para JavaScript e TypeScript;
 - [PostgreSQL](https://www.postgresql.org/) - Um dos bancos de dados relacionais mais populares do mundo;
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) - Biblioteca para transmissão segura de JWTs;
+
+### Como executar o projeto localmente
+
+Certifique-se que você tenha instalado em sua máquina o [Git](https://git-scm.com), o [NodeJS](https://nodejs.org/en/) e o [PostgreSQL](https://www.postgresql.org/). Em seguida, execute os seguintes passos:
+
+```bash
+# Clone este repositório
+$ git clone https://github.com/rodrigolemos/my-school
+
+# Acesse a pasta do projeto
+$ cd my-school
+
+# Instale as dependências
+$ npm install
+
+# Inclua no arquivo ormconfig.js suas configurações de banco de dados
+
+# Rode as migrations para criação das tabelas
+$ npx typeorm migration:run
+
+# Execute a aplicação em modo de desenvolvimento
+$ npm run dev
+```
+
+Após esses passos, aplicação estará disponível na porta 3000  - http://localhost:3000.
 
 ## Autor
 
