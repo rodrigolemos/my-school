@@ -42,6 +42,7 @@ Como mencionado, este é um projeto de estudos e tem como premissa o aprendizado
 - [TypeScript](https://www.typescriptlang.org/) - Uma extensão do JavaScript;
 - [Express](https://expressjs.com/) - Um framework web para Node.js;
 - [Express Validator](https://express-validator.github.io/docs/) - Middleware para validação de rotas;
+- [Helmet](https://helmetjs.github.io/) - Conjunto de validações de segurança para apps express;
 - [TypeORM](https://typeorm.io/) - Um dos ORMs mais populares para JavaScript e TypeScript;
 - [PostgreSQL](https://www.postgresql.org/) - Um dos bancos de dados relacionais mais populares do mundo;
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) - Biblioteca para transmissão segura de JWTs;
