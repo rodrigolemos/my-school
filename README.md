@@ -13,6 +13,14 @@ My School é um simples projeto de gerenciamento de usuários feito com o intuit
 
 Para facilitar a manutenção e separar as responsabilidades da aplicação, o front-end encontra-se [neste repositório](https://github.com/rodrigolemos/my-school-front).
 
+## Layout
+
+Exemplo do design adotado para páginas públicas.
+
+<p align="left">
+  <img alt="Principal" src="https://github.com/rodrigolemos/my-school-front/blob/main/public/images/my-school.png" style="width: 1100px; margin-top: 10px; margin-right: 5px;">
+</p>
+
 ## Definições
 
 O projeto foi dividido em 4 partes separadas por níveis de usuário da seguinte maneira:
@@ -27,13 +35,16 @@ O projeto foi dividido em 4 partes separadas por níveis de usuário da seguinte
 
 Além disso, foi implantado um workflow de aprovação de matrícula mediante validação da administração. Nesse fluxo, um **aluno** ou **professor** se cadastra no curso escolhido e entra em uma fila, podendo iniciar o seu curso somente após a atualização do pedido, feita somente por um **administrador**.
 
-## Layout
+## Tecnologias
 
-Exemplo do design adotado para páginas públicas.
+Como mencionado, este é um projeto de estudos e tem como premissa o aprendizado e a apresentação de tecnologias, frameworks e ferramentas de desenvolvimento. Segue a lista das principais libs utilizadas:
 
-<p align="left">
-  <img alt="Principal" src="https://github.com/rodrigolemos/my-school-front/blob/main/public/images/my-school.png" style="width: 1100px; margin-top: 10px; margin-right: 5px;">
-</p>
+- [TypeScript](https://www.typescriptlang.org/) - Uma extensão do JavaScript;
+- [Express](https://expressjs.com/) - Um framework web para Node.js;
+- [Express Validator](https://express-validator.github.io/docs/) - Middleware para validação de rotas;
+- [TypeORM](https://typeorm.io/) - Um dos ORMs mais populares para JavaScript e TypeScript;
+- [PostgreSQL](https://www.postgresql.org/) - Um dos bancos de dados relacionais mais populares do mundo;
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) - Biblioteca para transmissão segura de JWTs;
 
 ## Autor
 
