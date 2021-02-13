@@ -48,7 +48,7 @@ Como mencionado, este é um projeto de estudos e tem como premissa o aprendizado
 - [PostgreSQL](https://www.postgresql.org/) - Um dos bancos de dados relacionais mais populares do mundo;
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) - Biblioteca para transmissão segura de JWTs;
 
-### Como executar o projeto localmente
+## Como executar o projeto localmente
 
 Certifique-se que você tenha instalado em sua máquina o [Git](https://git-scm.com), o [NodeJS](https://nodejs.org/en/) e o [PostgreSQL](https://www.postgresql.org/). Em seguida, execute os seguintes passos:
 
