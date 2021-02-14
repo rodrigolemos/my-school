@@ -14,6 +14,9 @@ enrollmentsRouter.use(ensureAuthentication)
 // Only the own user can enroll to a course
 enrollmentsRouter.post('/create', ensureOnlyItself, setEnrollmentFormat, handleRouteError, EnrollmentController.store)
 
+// If user is not an admin, can see only its own enrollments
+enrollmentsRouter.get('/:id', ensureOnlyItself, EnrollmentController.index)
+
 // Only logged in admins can manage enrollments
 enrollmentsRouter.use(ensurePermission)
 

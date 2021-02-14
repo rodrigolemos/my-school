@@ -4,19 +4,22 @@ import AppError from '../errors/AppError'
 import FindUserByEmail from './FindUserByEmail'
 import FindCourseByName from './FindCourseByName'
 
-interface IRequest {
+interface IRequestQuery {
   user_id?: number
   course_id?: number
   user_email?: string
   course_name?: string
 }
 
+interface IRequestParams {
+  id?: number
+}
 class ListEnrollmentsService {
 
-  public async execute(query: IRequest): Promise<Enrollment[]> {
+  public async execute(query: IRequestQuery, params: IRequestParams): Promise<Enrollment[]> {
     const enrollmentRepository = getRepository(Enrollment)
 
-    const where: IRequest = {}
+    const where: IRequestQuery = {}
 
     if (query.user_email && !query.user_id) {
       const findUserByEmailService = new FindUserByEmail()
@@ -30,8 +33,9 @@ class ListEnrollmentsService {
       query.course_id = course.id
     }
 
-    if (query.user_id)
-      where.user_id = query.user_id
+    if (query.user_id || params.id) {
+      where.user_id = query.user_id || params.id
+    }
 
     if (query.course_id)
       where.course_id = query.course_id
