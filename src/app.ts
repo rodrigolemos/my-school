@@ -1,7 +1,7 @@
-import createConnection from './config/typeorm'
+import { getServerConnection } from './config/typeorm'
 import app from './server'
 
-createConnection()
+getServerConnection()
 
 const port = process.env.PORT || 3000
 
