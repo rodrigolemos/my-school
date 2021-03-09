@@ -1,6 +1,6 @@
 import request from 'supertest';
 import { Connection, getConnection } from 'typeorm';
-import createConnection from '../config/typeorm';
+import { getTestConnection } from '../config/typeorm';
 
 import app from '../server'
 
@@ -9,7 +9,7 @@ let connection: Connection;
 describe('Course tests', () => {
 
   beforeAll(async () => {
-    connection = await createConnection('test');
+    connection = await getTestConnection();
     await connection.runMigrations();
   });
 
@@ -28,9 +28,7 @@ describe('Course tests', () => {
 
   it('should return all courses', async () => {
     
-    const response = await request(app).get('/courses').send();
-
-    console.log(response.body);
+    // const response = await request(app).get('/courses').send({});
 
     expect(true).toBe(true);
     
