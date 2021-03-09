@@ -1,5 +1,6 @@
 import 'reflect-metadata'
-import './config/typeorm'
+import 'dotenv/config';
+
 import 'express-async-errors'
 import AppError from './errors/AppError'
 import express, { Request, Response, NextFunction } from 'express'
