@@ -61,12 +61,4 @@ describe('Course tests', () => {
     
   });
 
-  it('should throw 500 if course id is not an uuid', async () => {
-    
-    const response = await request(app).get(`/courses/123`).send();
-
-    expect(response.status).toBe(500);
-    
-  });
-
 });
