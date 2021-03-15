@@ -43,4 +43,13 @@ describe('Session tests', () => {
     expect(response.status).toBe(201);
   });
 
+  it('should throw 401 if incorrect e-mail or password is provided', async () => {
+    const response = await request(app).post('/sessions/create').send({
+      email: 'no@email.com',
+      password: 'no_password'
+    });
+
+    expect(response.status).toBe(401);
+  });
+
 });
