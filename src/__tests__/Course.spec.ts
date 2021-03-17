@@ -2,6 +2,8 @@ import request from 'supertest';
 import { v4 as uuidv4 } from 'uuid';
 import { Connection, getConnection } from 'typeorm';
 import { getTestConnection } from '../config/typeorm';
+import { sign } from 'jsonwebtoken';
+import { generateHash } from '../config/hash';
 
 import app from '../server'
 
@@ -18,8 +20,10 @@ describe('Course tests', () => {
     
     await connection.runMigrations();
 
+    const criptPassword = await generateHash('password')
+
     await connection.query(
-      `INSERT INTO users VALUES('${userId1}', 'Admin', 'email@email.com', 'password', 'admin', '${userId1}', '${date}')`
+      `INSERT INTO users VALUES('${userId1}', 'Admin', 'email@email.com', '${criptPassword}', 'admin', '${userId1}', '${date}')`
     );
 
     await connection.query(
@@ -59,6 +63,29 @@ describe('Course tests', () => {
 
     expect(response.status).toBe(404);
     
+  });
+
+  it('should create a new course', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId1),
+      expiresIn: '1h'
+    })
+
+    const response = await request(app)
+    .post('/courses/create')
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({
+      name: 'Test Course',
+      description: 'A test course',
+      period: 'N',
+      positions: 10,
+      created_by: userId1,
+      tags: []
+    })
+
+    expect(response.status).toBe(201);
   });
 
 });
