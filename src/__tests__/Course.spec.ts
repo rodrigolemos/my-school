@@ -10,7 +10,7 @@ import app from '../server'
 let connection: Connection;
 
 const [courseId1, courseId2] = [uuidv4(), uuidv4()];
-const userId1 = uuidv4();
+const [userId1, userId2] = [uuidv4(), uuidv4()];
 const date = new Date().toISOString();
 
 describe('Course tests', () => {
@@ -24,6 +24,10 @@ describe('Course tests', () => {
 
     await connection.query(
       `INSERT INTO users VALUES('${userId1}', 'Admin', 'email@email.com', '${criptPassword}', 'admin', '${userId1}', '${date}')`
+    );
+
+    await connection.query(
+      `INSERT INTO users VALUES('${userId2}', 'Student', 'student@email.com', '${criptPassword}', 'student', '${userId2}', '${date}')`
     );
 
     await connection.query(
@@ -86,6 +90,29 @@ describe('Course tests', () => {
     })
 
     expect(response.status).toBe(201);
+  });
+
+  it('should throw 401 if non-admin user tries to create a new course', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId2),
+      expiresIn: '1h'
+    })
+
+    const response = await request(app)
+    .post('/courses/create')
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({
+      name: 'Test Course',
+      description: 'A test course',
+      period: 'N',
+      positions: 10,
+      created_by: userId1,
+      tags: []
+    })
+
+    expect(response.status).toBe(401);
   });
 
 });
