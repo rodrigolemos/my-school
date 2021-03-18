@@ -100,7 +100,7 @@ describe('Course tests', () => {
       description: 'A test course',
       period: 'N',
       positions: 10,
-      created_by: userId1,
+      created_by: userId2,
       tags: []
     })
 
@@ -128,6 +128,29 @@ describe('Course tests', () => {
     })
 
     expect(response.status).toBe(201);
+  });
+
+  it('should throw 400 if course information was not provided correctly', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId1),
+      expiresIn: '1h'
+    })
+
+    const response = await request(app)
+    .post('/courses/create')
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({
+      name: '',
+      description: '',
+      period: 'N',
+      positions: 10,
+      created_by: userId1,
+      tags: []
+    })
+
+    expect(response.status).toBe(400);
   });
 
 });
