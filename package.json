@@ -7,7 +7,7 @@
     "dev": "nodemon src/app.ts",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
     "start": "node dist/app.js",
-    "test": "jest --detectOpenHandles"
+    "test": "jest --detectOpenHandles --verbose"
   },
   "author": "Rodrigo Lemos",
   "license": "ISC",
