@@ -153,4 +153,42 @@ describe('Course tests', () => {
     expect(response.status).toBe(400);
   });
 
+  it('should throw 400 if an admin tries to create a new course with an already used course name', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId1),
+      expiresIn: '1h'
+    })
+
+    await request(app)
+    .post('/courses/create')
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({
+      name: 'Test Course',
+      description: 'A test course',
+      period: 'N',
+      positions: 10,
+      created_by: userId1,
+      tags: []
+    })
+
+    const response = await request(app)
+    .post('/courses/create')
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({
+      name: 'Test Course',
+      description: 'A test course',
+      period: 'N',
+      positions: 10,
+      created_by: userId1,
+      tags: []
+    })
+
+    expect(response.status).toBe(400);
+    // expect(response.body.status).toBe(2);
+  });
+
 });
