@@ -68,18 +68,10 @@ describe('Course tests', () => {
     expect(response.status).toBe(404);
     
   });
-
-  it('should create a new course', async () => {
-    const token = sign({}, process.env.JWT_SECRET || '', {
-      subject: String(userId1),
-      expiresIn: '1h'
-    })
-
+  
+  it('should throw 401 if non-logged user tries to create a new course', async () => {
     const response = await request(app)
     .post('/courses/create')
-    .set({
-      'Authorization': `Bearer ${token}`
-    })
     .send({
       name: 'Test Course',
       description: 'A test course',
@@ -89,7 +81,7 @@ describe('Course tests', () => {
       tags: []
     })
 
-    expect(response.status).toBe(201);
+    expect(response.status).toBe(401);
   });
 
   it('should throw 401 if non-admin user tries to create a new course', async () => {
@@ -113,6 +105,29 @@ describe('Course tests', () => {
     })
 
     expect(response.status).toBe(401);
+  });
+
+  it('should allow an admin to create a new course', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId1),
+      expiresIn: '1h'
+    })
+
+    const response = await request(app)
+    .post('/courses/create')
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({
+      name: 'Test Course',
+      description: 'A test course',
+      period: 'N',
+      positions: 10,
+      created_by: userId1,
+      tags: []
+    })
+
+    expect(response.status).toBe(201);
   });
 
 });
