@@ -73,6 +73,7 @@ describe('UpdateCourseService', () => {
       'Authorization': `Bearer ${token}`
     })
     .send({
+      id: courseId1,
       name: 'Test Course',
       description: 'A test course',
       period: 'N',
@@ -84,19 +85,19 @@ describe('UpdateCourseService', () => {
     expect(response.status).toBe(401);
   });
 
-  /*
-  it('should allow an admin to create a new course', async () => {
+  it('should allow an admin to update a course', async () => {
     const token = sign({}, process.env.JWT_SECRET || '', {
       subject: String(userId1),
       expiresIn: '1h'
     })
 
     const response = await request(app)
-    .post('/courses/create')
+    .put('/courses/')
     .set({
       'Authorization': `Bearer ${token}`
     })
     .send({
+      id: courseId1,
       name: 'Test Course',
       description: 'A test course',
       period: 'N',
@@ -105,9 +106,10 @@ describe('UpdateCourseService', () => {
       tags: []
     })
 
-    expect(response.status).toBe(201);
+    expect(response.status).toBe(200);
   });
 
+  /*
   it('should throw 400 if course information was not provided correctly', async () => {
     const token = sign({}, process.env.JWT_SECRET || '', {
       subject: String(userId1),
