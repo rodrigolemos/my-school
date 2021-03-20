@@ -115,8 +115,8 @@ describe('CreateCourseService', () => {
     .send({
       name: '',
       description: '',
-      period: 'N',
-      positions: 10,
+      period: '',
+      positions: 'string',
       created_by: userId1,
       tags: []
     })
