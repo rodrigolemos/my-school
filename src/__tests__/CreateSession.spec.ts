@@ -11,7 +11,7 @@ let connection: Connection;
 const userId1 = uuidv4();
 const date = new Date().toISOString();
 
-describe('Session tests', () => {
+describe('CreateSessionService', () => {
 
   beforeAll(async () => {
     connection = await getTestConnection();
