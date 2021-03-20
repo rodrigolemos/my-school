@@ -61,15 +61,14 @@ describe('UpdateCourseService', () => {
     expect(response.status).toBe(401);
   });
 
-  /*
-  it('should throw 401 if non-admin user tries to create a new course', async () => {
+  it('should throw 401 if non-admin user tries to update a course', async () => {
     const token = sign({}, process.env.JWT_SECRET || '', {
       subject: String(userId2),
       expiresIn: '1h'
     })
 
     const response = await request(app)
-    .post('/courses/create')
+    .put('/courses/')
     .set({
       'Authorization': `Bearer ${token}`
     })
@@ -85,6 +84,7 @@ describe('UpdateCourseService', () => {
     expect(response.status).toBe(401);
   });
 
+  /*
   it('should allow an admin to create a new course', async () => {
     const token = sign({}, process.env.JWT_SECRET || '', {
       subject: String(userId1),
