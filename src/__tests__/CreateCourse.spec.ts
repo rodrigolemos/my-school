@@ -55,6 +55,41 @@ describe('CreateCourseService', () => {
     expect(response.status).toBe(401);
   });
 
+  it('should throw 401 if authentication token is not provided', async () => {
+    const response = await request(app)
+    .post('/courses/create')
+    .send({
+      name: 'Test Course',
+      description: 'A test course',
+      period: 'N',
+      positions: 10,
+      created_by: userId2,
+      tags: []
+    })
+
+    expect(response.status).toBe(401);
+    expect(response.body.message.status).toBe(1);
+  });
+
+  it('should throw 401 if wrong authentication token is provided', async () => {
+    const response = await request(app)
+    .post('/courses/create')
+    .set({
+      'Authorization': `Bearer wrong_token`
+    })
+    .send({
+      name: 'Test Course',
+      description: 'A test course',
+      period: 'N',
+      positions: 10,
+      created_by: userId2,
+      tags: []
+    })
+
+    expect(response.status).toBe(401);
+    expect(response.body.message.status).toBe(2);
+  });
+
   it('should throw 401 if non-admin user tries to create a new course', async () => {
     const token = sign({}, process.env.JWT_SECRET || '', {
       subject: String(userId2),
