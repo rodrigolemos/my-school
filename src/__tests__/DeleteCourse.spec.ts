@@ -45,6 +45,22 @@ describe('DeleteCourseService', () => {
     await mainConnection.close();
   });
 
+  it('should throw 401 if non-admin user tries to delete a course', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId2),
+      expiresIn: '1h'
+    })
+
+    const response = await request(app)
+    .delete(`/courses/${courseId1}`)
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({})
+
+    expect(response.status).toBe(401);
+  });
+
   it('should allow an admin to delete a course', async () => {
     const token = sign({}, process.env.JWT_SECRET || '', {
       subject: String(userId1),
