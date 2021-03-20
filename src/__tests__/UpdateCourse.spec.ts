@@ -133,33 +133,19 @@ describe('UpdateCourseService', () => {
     expect(response.status).toBe(400);
   });
 
-  /*
-  it('should throw 400 if an admin tries to create a new course with an already used course name', async () => {
+  it('should throw 404 if an admin tries to update a course that does not exist', async () => {
     const token = sign({}, process.env.JWT_SECRET || '', {
       subject: String(userId1),
       expiresIn: '1h'
     })
 
-    await request(app)
-    .post('/courses/create')
-    .set({
-      'Authorization': `Bearer ${token}`
-    })
-    .send({
-      name: 'Test Course',
-      description: 'A test course',
-      period: 'N',
-      positions: 10,
-      created_by: userId1,
-      tags: []
-    })
-
     const response = await request(app)
-    .post('/courses/create')
+    .put('/courses')
     .set({
       'Authorization': `Bearer ${token}`
     })
     .send({
+      id: userId1,
       name: 'Test Course',
       description: 'A test course',
       period: 'N',
@@ -168,9 +154,8 @@ describe('UpdateCourseService', () => {
       tags: []
     })
 
-    expect(response.status).toBe(400);
-    expect(response.body.message.status).toBe(2);
+    expect(response.status).toBe(404);
+    expect(response.body.message.status).toBe(1);
   });
-  */
 
 });
