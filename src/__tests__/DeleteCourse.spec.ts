@@ -52,13 +52,30 @@ describe('DeleteCourseService', () => {
     })
 
     const response = await request(app)
-    .delete( `/courses/${courseId1}`)
+    .delete(`/courses/${courseId1}`)
     .set({
       'Authorization': `Bearer ${token}`
     })
     .send({})
 
     expect(response.status).toBe(204);
+  });
+
+  it('should throw 404 if an admin tries to delete a course that does not exist', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId1),
+      expiresIn: '1h'
+    })
+
+    const response = await request(app)
+    .delete(`/courses/${courseId1}`)
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({})
+
+    expect(response.status).toBe(404);
+    expect(response.body.message.status).toBe(1);
   });
 
 });
