@@ -188,7 +188,7 @@ describe('Course tests', () => {
     })
 
     expect(response.status).toBe(400);
-    // expect(response.body.status).toBe(2);
+    expect(response.body.message.status).toBe(2);
   });
 
 });
