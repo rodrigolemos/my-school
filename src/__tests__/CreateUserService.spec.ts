@@ -7,8 +7,6 @@ import app from '../server'
 
 let connection: Connection;
 
-const date = new Date().toISOString();
-
 describe('CreateUserService', () => {
 
   beforeAll(async () => {
@@ -17,7 +15,7 @@ describe('CreateUserService', () => {
   });
 
   afterAll(async () => {
-    await connection.query('TRUNCATE TABLE users CASCADE');  
+    await connection.query('TRUNCATE TABLE users CASCADE');
 
     const mainConnection = getConnection();
     await connection.close();
