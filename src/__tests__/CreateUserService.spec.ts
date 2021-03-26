@@ -90,6 +90,7 @@ describe('CreateUserService', () => {
     });
 
     expect(response.status).toBe(401);
+    expect(response.body.message.status).toBe(6);
   });
 
 });
