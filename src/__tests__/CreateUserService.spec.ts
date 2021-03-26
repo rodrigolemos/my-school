@@ -76,6 +76,20 @@ describe('CreateUserService', () => {
     });
 
     expect(response.status).toBe(400);
-  });  
+  });
+
+  it('should throw 401 if a non-logged user tries to create an admin', async () => {
+    const password = await generateHash('password')
+    const response = await request(app)
+    .post('/users/create')
+    .send({
+      name: 'Another Teacher',
+      email: 'another_teacher@email.com',
+      password,
+      role: 'admin'
+    });
+
+    expect(response.status).toBe(401);
+  });
 
 });
