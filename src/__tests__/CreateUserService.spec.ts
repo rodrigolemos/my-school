@@ -66,4 +66,16 @@ describe('CreateUserService', () => {
     expect(response.status).toBe(201);
   });
 
+  it('should throw 400 if the user tries to create an account with a used e-mail', async () => {
+    const password = await generateHash('password')
+    const response = await request(app).post('/users/create').send({
+      name: 'Student',
+      email: 'student@email.com',
+      password,
+      role: 'student'
+    });
+
+    expect(response.status).toBe(400);
+  });  
+
 });
