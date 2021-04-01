@@ -15,11 +15,6 @@ describe('CreateUserService', () => {
 
   beforeAll(async () => {
     connection = await getTestConnection();
-    await connection.runMigrations();
-  });
-
-  afterAll(async () => {
-    await connection.query('TRUNCATE TABLE users CASCADE');
 
     const criptPassword = await generateHash('password')
 
@@ -27,6 +22,11 @@ describe('CreateUserService', () => {
       `INSERT INTO users VALUES('${userId1}', 'Admin', 'admin@email.com', '${criptPassword}', 'admin', '${userId1}', '${date}')`
     );
 
+    await connection.runMigrations();
+  });
+
+  afterAll(async () => {
+    await connection.query('TRUNCATE TABLE users CASCADE');
     const mainConnection = getConnection();
     await connection.close();
     await mainConnection.close();
@@ -91,6 +91,29 @@ describe('CreateUserService', () => {
 
     expect(response.status).toBe(401);
     expect(response.body.message.status).toBe(6);
+  });
+
+  it('should allow admins to create an admin', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId1),
+      expiresIn: '1h'
+    })
+
+    const password = await generateHash('password')
+    const response = await request(app)
+    .post('/users/create')
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({
+      name: 'New Admin',
+      email: 'new_admin@email.com',
+      password,
+      role: 'admin',
+      created_by: userId1
+    });
+
+    expect(response.status).toBe(201);
   });
 
 });
