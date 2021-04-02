@@ -8,7 +8,7 @@ import { sign } from 'jsonwebtoken';
 import app from '../server'
 
 let connection: Connection;
-const userId1 = uuidv4();
+const [userId1, userId2] = [uuidv4(), uuidv4()];
 const date = new Date().toISOString();
 
 describe('CreateUserService', () => {
@@ -20,6 +20,10 @@ describe('CreateUserService', () => {
 
     await connection.query(
       `INSERT INTO users VALUES('${userId1}', 'Admin', 'admin@email.com', '${criptPassword}', 'admin', '${userId1}', '${date}')`
+    );
+
+    await connection.query(
+      `INSERT INTO users VALUES('${userId2}', 'Fake User', 'fake@email.com', '${criptPassword}', 'student', '${userId1}', '${date}')`
     );
 
     await connection.runMigrations();
@@ -91,6 +95,30 @@ describe('CreateUserService', () => {
 
     expect(response.status).toBe(401);
     expect(response.body.message.status).toBe(6);
+  });
+
+  it('should throw 401 if a non-admin user tries to create an admin', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId1),
+      expiresIn: '1h'
+    })
+
+    const password = await generateHash('password')
+    const response = await request(app)
+    .post('/users/create')
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({
+      name: 'New Admin',
+      email: 'new_admin@email.com',
+      password,
+      role: 'admin',
+      created_by: userId2
+    });
+
+    expect(response.status).toBe(401);
+    expect(response.body.message.status).toBe(5);
   });
 
   it('should allow admins to create an admin', async () => {
