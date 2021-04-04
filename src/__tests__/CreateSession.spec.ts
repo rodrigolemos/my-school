@@ -52,4 +52,14 @@ describe('CreateSessionService', () => {
     expect(response.status).toBe(401);
   });
 
+  it('should throw 401 if invalid password is provided', async () => {
+    const response = await request(app).post('/sessions/create').send({
+      email: 'email@email.com',
+      password: 'passwordx'
+    });
+
+    expect(response.status).toBe(401);
+    expect(response.body.message.status).toBe(1);
+  });
+
 });
