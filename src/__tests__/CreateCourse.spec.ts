@@ -136,7 +136,7 @@ describe('CreateCourseService', () => {
     expect(response.status).toBe(201);
   });
 
-  it('should throw 400 if course information was not provided correctly', async () => {
+  it('should throw 400 if course information was not provided', async () => {
     const token = sign({}, process.env.JWT_SECRET || '', {
       subject: String(userId1),
       expiresIn: '1h'
@@ -151,6 +151,29 @@ describe('CreateCourseService', () => {
       name: '',
       description: '',
       period: '',
+      positions: 'string',
+      created_by: userId1,
+      tags: []
+    })
+
+    expect(response.status).toBe(400);
+  });
+
+  it('should throw 400 if course information was not provided correctly', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId1),
+      expiresIn: '1h'
+    })
+
+    const response = await request(app)
+    .post('/courses/create')
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({
+      name: '',
+      description: '',
+      period: 'x',
       positions: 'string',
       created_by: userId1,
       tags: []
