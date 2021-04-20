@@ -60,4 +60,27 @@ describe('UpdateUserService', () => {
     expect(response.body.message.status).toBe(2);
   });
 
+  it('should allow a user to update its own information', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId1),
+      expiresIn: '1h'
+    });
+
+    const response = await request(app)
+    .put('/users/')
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({
+      id: userId1,
+      name: 'Updated Admin',
+      email: 'updated@email.com',
+      password: 'password',
+      contact: 'contact',
+      bio: 'bio'
+    });
+
+    expect(response.status).toBe(200);
+  });
+
 });
