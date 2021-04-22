@@ -83,4 +83,28 @@ describe('UpdateUserService', () => {
     expect(response.status).toBe(200);
   });
 
+  it('should throw 400 if a user tries to use an already used email', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId1),
+      expiresIn: '1h'
+    });
+
+    const response = await request(app)
+    .put('/users/')
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({
+      id: userId1,
+      name: 'Used Email',
+      email: 'admin2@email.com',
+      password: 'password',
+      contact: 'contact',
+      bio: 'bio'
+    });
+
+    expect(response.status).toBe(400);
+    expect(response.body.message.status).toBe(2);
+  });
+
 });
