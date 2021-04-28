@@ -22,10 +22,6 @@ describe('ListUsersService', () => {
       `INSERT INTO users VALUES('${userId1}', 'Admin', 'admin@email.com', '${criptPassword}', 'admin', '${userId1}', '${date}')`
     );
 
-    await connection.query(
-      `INSERT INTO users VALUES('${userId2}', 'Student', 'find-student@email.com', '${criptPassword}', 'student', '${userId1}', '${date}')`
-    );
-
     await connection.runMigrations();
   });
 
@@ -50,6 +46,23 @@ describe('ListUsersService', () => {
     .send({});
 
     expect(response.status).toBe(200);
+  });
+
+  it('should throw 404 if no users were found', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId1),
+      expiresIn: '1h'
+    });
+
+    const response = await request(app)
+    .get(`/users/${userId2}`)
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({});
+
+    expect(response.status).toBe(404);
+    expect(response.body.message.status).toBe(1);
   });
 
 });
