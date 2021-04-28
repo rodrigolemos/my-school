@@ -65,7 +65,6 @@ describe('ListCourseService', () => {
     const response = await request(app).get(`/courses/${userId1}`).send();
 
     expect(response.status).toBe(404);
-    
   });
 
 });
