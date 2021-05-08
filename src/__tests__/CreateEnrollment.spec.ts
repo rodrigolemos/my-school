@@ -64,4 +64,25 @@ describe('CreateCourseService', () => {
     expect(response.status).toBe(201);
   });
 
+  it('should throw 404 if a user tries to create an enrollment in a course that does not exist', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId1),
+      expiresIn: '1h'
+    })
+
+    const response = await request(app)
+    .post('/enrollments/create')
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({
+      user_id: userId2,
+      course_id: userId2,
+      id: userId1
+    })
+
+    expect(response.status).toBe(404);
+    expect(response.body.message.status).toBe(1);
+  });
+
 });
