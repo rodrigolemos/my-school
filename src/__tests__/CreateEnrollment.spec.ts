@@ -89,7 +89,7 @@ describe('CreateCourseService', () => {
     expect(response.body.message.status).toBe(1);
   });
 
-  it('should throw 404 if a user tries to create an enrollment in a student/teacher that does not exist', async () => {
+  it('should throw 404 if a user tries to create an enrollment to a student/teacher that does not exist', async () => {
     const token = sign({}, process.env.JWT_SECRET || '', {
       subject: String(userId1),
       expiresIn: '1h'
@@ -108,9 +108,9 @@ describe('CreateCourseService', () => {
 
     expect(response.status).toBe(404);
     expect(response.body.message.status).toBe(2);
-  })
+  });
 
-  it('should throw 400 if a user tries to enroll a student or teacher to a course with no open positions', async () => {
+  it('should throw 400 if a user tries to enroll a student or teacher in a course with no open positions', async () => {
     const token = sign({}, process.env.JWT_SECRET || '', {
       subject: String(userId1),
       expiresIn: '1h'
@@ -129,6 +129,27 @@ describe('CreateCourseService', () => {
 
     expect(response.status).toBe(400);
     expect(response.body.message.status).toBe(2);
+  });
+
+  it('should throw 400 if a user tries to enroll an admin in a course', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId1),
+      expiresIn: '1h'
+    })
+
+    const response = await request(app)
+    .post('/enrollments/create')
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({
+      user_id: userId1,
+      course_id: courseId1,
+      id: userId1
+    })
+
+    expect(response.status).toBe(400);
+    expect(response.body.message.status).toBe(3);
   });
 
 });
