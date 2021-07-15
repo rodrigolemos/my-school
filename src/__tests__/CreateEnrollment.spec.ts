@@ -9,7 +9,8 @@ import app from '../server'
 
 let connection: Connection;
 
-const [userId1, userId2, userId3, courseId1, courseId2] = [uuidv4(), uuidv4(), uuidv4(), uuidv4(), uuidv4()];
+const [userId1, userId2, userId3, userId4] = [uuidv4(), uuidv4(), uuidv4(), uuidv4()];
+const [courseId1, courseId2] = [uuidv4(), uuidv4()];
 const date = new Date().toISOString();
 
 describe('CreateCourseService', () => {
@@ -27,6 +28,10 @@ describe('CreateCourseService', () => {
 
     await connection.query(
       `INSERT INTO users VALUES('${userId2}', 'Student', 'student@email.com', '${criptPassword}', 'student', '${userId2}', '${date}')`
+    );
+
+    await connection.query(
+      `INSERT INTO users VALUES('${userId4}', 'Student 2', 'student2@email.com', '${criptPassword}', 'student', '${userId4}', '${date}')`
     );
 
     await connection.query(
@@ -191,11 +196,33 @@ describe('CreateCourseService', () => {
     .send({
       user_id: userId3,
       course_id: courseId1,
+      created_by: userId1,
       id: userId1,
-      created_by: userId1
     })
 
     expect(response.status).toBe(201);
+  });
+
+  it('should throw 401 if a non-admin tries to enroll a user in a course', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId1),
+      expiresIn: '1h'
+    })
+
+    const response = await request(app)
+    .post('/enrollments/create')
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({
+      user_id: userId4,
+      course_id: courseId1,
+      created_by: userId2,
+      id: userId1,
+    })
+
+    expect(response.status).toBe(401);
+    expect(response.body.message.status).toBe(3);
   });
 
 });
