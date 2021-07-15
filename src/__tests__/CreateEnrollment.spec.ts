@@ -9,7 +9,7 @@ import app from '../server'
 
 let connection: Connection;
 
-const [userId1, userId2, courseId1, courseId2] = [uuidv4(), uuidv4(), uuidv4(), uuidv4()];
+const [userId1, userId2, userId3, courseId1, courseId2] = [uuidv4(), uuidv4(), uuidv4(), uuidv4(), uuidv4()];
 const date = new Date().toISOString();
 
 describe('CreateCourseService', () => {
@@ -27,6 +27,10 @@ describe('CreateCourseService', () => {
 
     await connection.query(
       `INSERT INTO users VALUES('${userId2}', 'Student', 'student@email.com', '${criptPassword}', 'student', '${userId2}', '${date}')`
+    );
+
+    await connection.query(
+      `INSERT INTO users VALUES('${userId3}', 'Teacher', 'teacher@email.com', '${criptPassword}', 'teacher', '${userId3}', '${date}')`
     );
 
     await connection.query(
@@ -171,6 +175,27 @@ describe('CreateCourseService', () => {
 
     expect(response.status).toBe(400);
     expect(response.body.message.status).toBe(3);
+  });
+  
+  it('should allow an admin to create an enrollment', async () => {
+    const token = sign({}, process.env.JWT_SECRET || '', {
+      subject: String(userId1),
+      expiresIn: '1h'
+    })
+
+    const response = await request(app)
+    .post('/enrollments/create')
+    .set({
+      'Authorization': `Bearer ${token}`
+    })
+    .send({
+      user_id: userId3,
+      course_id: courseId1,
+      id: userId1,
+      created_by: userId1
+    })
+
+    expect(response.status).toBe(201);
   });
 
 });
