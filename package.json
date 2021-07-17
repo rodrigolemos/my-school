@@ -7,7 +7,7 @@
     "dev": "nodemon src/app.ts",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
     "build": "npx tsc --build",
-    "start": "npx tsc --build && node dist/src/app.js",
+    "start": "node dist/src/app.js",
     "test": "jest --detectOpenHandles --verbose"
   },
   "author": "Rodrigo Lemos",
