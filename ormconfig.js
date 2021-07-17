@@ -10,5 +10,5 @@ module.exports = {
   "cli": {
     "migrationsDir": "./src/migrations"
   },
-  "ssl": { rejectUnauthorized: false }
+  extra: { ssl: true, rejectUnauthorized: false }
 }
