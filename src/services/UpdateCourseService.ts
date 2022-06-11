@@ -6,14 +6,26 @@ interface IRequest {
   id: string
   name?: string
   description?: string
-  tags?: object
-  positions?: number
+  tags?: string[]
+  resources?: string[]
+  icon: string
+  audience: string
+  knowledge: string
 }
 
 class UpdateCourseService {
 
   public async execute(body: IRequest): Promise<Course> {
-    const { id, name, description, positions, tags } = body
+    const {
+      id,
+      name,
+      description,
+      tags,
+      resources,
+      audience,
+      knowledge,
+      icon
+    } = body
     const courseRepository = getRepository(Course)
 
     const courseRegistered = await courseRepository.findOne({
@@ -34,11 +46,20 @@ class UpdateCourseService {
     if (description)
       courseRegistered.description = description
 
-    if (positions)
-      courseRegistered.positions = positions
-
     if (tags)
       courseRegistered.tags = tags
+    
+    if (resources)
+      courseRegistered.resources = resources
+    
+    if (audience)
+      courseRegistered.audience = audience
+    
+    if (knowledge)
+      courseRegistered.knowledge = knowledge
+    
+    if (icon)
+      courseRegistered.icon = icon
 
     courseRegistered.updated_at = new Date()
 

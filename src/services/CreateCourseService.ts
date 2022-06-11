@@ -6,16 +6,27 @@ import AppError from '../errors/AppError'
 interface IRequest {
   name: string
   description: string
-  period: string
-  positions: number
   tags?: string[]
+  resources?: string[]
+  icon: string
+  audience: string
+  knowledge: string
   created_by: number
 }
 
 class CreateCourseService {
 
   public async execute(body: IRequest): Promise<Course> {
-    const { name, description, period, positions, created_by, tags } = body
+    const {
+      name,
+      description,
+      created_by,
+      tags,
+      resources,
+      audience,
+      knowledge,
+      icon
+    } = body
 
     // Check permissions
     if (!await checkPermission(created_by))
@@ -29,7 +40,6 @@ class CreateCourseService {
     const courseRegistered = await courseRepository.findOne({
       where: {
         name,
-        period
       }
     })
 
@@ -39,7 +49,16 @@ class CreateCourseService {
         message: 'A course with this name/period is already registered'
       }, 400)
 
-    const course = courseRepository.create({ name, description, period, positions, created_by, tags })
+    const course = courseRepository.create({
+      name,
+      description,
+      created_by,
+      tags,
+      resources,
+      audience,
+      knowledge,
+      icon
+    })
 
     await courseRepository.save(course)
 

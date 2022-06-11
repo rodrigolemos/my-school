@@ -54,24 +54,6 @@ class UpdateEnrollmentService {
         status: 2,
         message: 'This user role is not allowed to be enrolled to a course'
       }, 400)
-    
-    // Validade course positions
-    if (user.role === 'student') {
-      if (course.positions) {
-        // If its enrollment is approved
-        if (status === 'A') {
-          if (course.positions === 0)
-            throw new AppError({
-              status: 3,
-              message: 'There are no open positions to this course'
-            }, 400)
-          
-          course.positions = course.positions - 1
-        } else {
-          course.positions = course.positions + 1
-        }
-      }
-    }
 
     // Check enrollment is pendent
     const enrollmentFound = await enrollmentRepository.findOne({
@@ -101,7 +83,6 @@ class UpdateEnrollmentService {
 
     enrollmentFound.status = status
 
-    // Update course positions
     await courseRepository.save(course)
 
     await enrollmentRepository.update({ user_id, course_id }, enrollmentFound)

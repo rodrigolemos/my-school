@@ -20,14 +20,20 @@ class Course {
   @Column('varchar')
   description?: string
 
-  @Column('varchar')
-  period?: string
-
-  @Column('integer')
-  positions?: number
-
   @Column('json')
   tags?: object
+
+  @Column('varchar')
+  icon?: string
+
+  @Column('json')
+  resources?: object
+
+  @Column('varchar')
+  audience?: string
+
+  @Column('varchar')
+  knowledge?: string
 
   @Column('integer')
   @OneToOne(() => User, user => user.id, { eager: true })

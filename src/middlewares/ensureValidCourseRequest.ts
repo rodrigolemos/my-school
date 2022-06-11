@@ -13,23 +13,38 @@ export const setAddCourseFormat = checkSchema({
       options: { min: 3 }
     }
   },
-  period: {
-    custom: {
-      errorMessage: 'Please enter a valid period (M, E, V)',
-      options: (value, { }) => {
-        // morning, evening, nightly
-        return ['m', 'e', 'n'].indexOf(value.toLowerCase()) >= 0
-      }
-    }
-  },
-  positions: {
-    errorMessage: 'Please enter an integer and positive positions number',
-    isInt: true,
-  },
   tags: {
     errorMessage: 'Please enter valid tags for this course',
     isLength: {
       options: { max: 200 }
+    },
+    optional: true
+  },
+  icon: {
+    errorMessage: 'Please enter a valid icon',
+    isLength: {
+      options: { min: 3 }
+    },
+    optional: true
+  },
+  resources: {
+    errorMessage: 'Please enter valid resources for this course',
+    isLength: {
+      options: { max: 200 }
+    },
+    optional: true
+  },
+  audience: {
+    errorMessage: 'Please enter a valid audience',
+    isLength: {
+      options: { min: 3 }
+    },
+    optional: true
+  },
+  knowledge: {
+    errorMessage: 'Please enter a valid knowledge',
+    isLength: {
+      options: { min: 3 }
     },
     optional: true
   },
@@ -62,15 +77,38 @@ export const setUpdateCourseFormat = checkSchema({
     },
     optional: true
   },
-  positions: {
-    errorMessage: 'Please enter an integer and positive positions number',
-    isInt: true,
-    optional: true
-  },
   tags: {
     errorMessage: 'Please enter valid tags for this course',
     isLength: {
       options: { max: 200 }
+    },
+    optional: true
+  },
+  icon: {
+    errorMessage: 'Please enter a valid icon',
+    isLength: {
+      options: { min: 3 }
+    },
+    optional: true
+  },
+  resources: {
+    errorMessage: 'Please enter valid resources for this course',
+    isLength: {
+      options: { max: 200 }
+    },
+    optional: true
+  },
+  audience: {
+    errorMessage: 'Please enter a valid audience',
+    isLength: {
+      options: { min: 3 }
+    },
+    optional: true
+  },
+  knowledge: {
+    errorMessage: 'Please enter a valid knowledge',
+    isLength: {
+      options: { min: 3 }
     },
     optional: true
   },

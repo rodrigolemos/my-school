@@ -33,13 +33,6 @@ class CreateEnrollmentService {
         status: 1,
         message: 'Course not found'
       }, 404)
-    
-    // Validade course positions
-    if (course.positions === 0)
-      throw new AppError({
-        status: 2,
-        message: 'There are no open positions to this course'
-      }, 400)
 
     // Check if user does exist
     // Check if user can be enrolled to a course
