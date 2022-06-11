@@ -6,7 +6,7 @@ import FindCourseByName from './FindCourseByName'
 
 interface IRequestQuery {
   user_id?: number
-  course_id?: number
+  course_id?: string
   user_email?: string
   course_name?: string
 }

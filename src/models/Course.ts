@@ -12,7 +12,7 @@ import User from './User'
 @Entity('courses')
 class Course {
   @PrimaryGeneratedColumn('increment')
-  id?: number
+  id?: string
 
   @Column('varchar')
   name?: string
@@ -25,6 +25,9 @@ class Course {
 
   @Column('varchar')
   icon?: string
+
+  @Column('varchar')
+  visibility?: 'public' | 'private'
 
   @Column('json')
   resources?: object

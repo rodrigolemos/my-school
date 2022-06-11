@@ -9,7 +9,7 @@ class CourseController {
 
   public async index(req: Request, res: Response): Promise<Response> {
     const listCoursesService = new ListCoursesService()
-    const courses = await listCoursesService.execute(req.params)
+    const courses = await listCoursesService.execute(req)
     return res.send(courses)
   }
 

@@ -1,20 +1,21 @@
 import { getRepository } from 'typeorm'
+import { Request } from 'express'
 import Course from '../models/Course'
 import AppError from '../errors/AppError'
 
-interface IRequest {
-  id?: number
-}
-
 class ListCoursesService {
 
-  public async execute(params: IRequest): Promise<Course[]> {
+  public async execute(request: Request): Promise<Course[]> {
+    const { params, query } = request
     const courseRepository = getRepository(Course)
 
-    const where: IRequest = {}
+    const where: Partial<Course> = {}
 
     if (params.id)
       where.id = params.id
+    
+    if (query.visibility)
+      where.visibility = query.visibility as 'public' | 'private'
 
     const courses = await courseRepository.find({ where, order: { name: 'ASC' } })
 
